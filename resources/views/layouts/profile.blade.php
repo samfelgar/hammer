@@ -61,12 +61,12 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="{{ route('profile.index') }}" class="dropdown-item">Meus dados</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
+
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
@@ -81,15 +81,6 @@
     <main class="py-4">
         <div class="container">
             <div class="row">
-                <nav class="col-md-2">
-                    <p class="font-weight-bold">Categorias</p>
-                    <ul class="nav flex-column">
-                        <li class="nav-item"><a href="#" class="nav-link">Pintura</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Gesso</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Alvenaria</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Pisos</a></li>
-                    </ul>
-                </nav>
                 <div class="col">
                     @yield('content')
                 </div>
