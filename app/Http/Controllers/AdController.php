@@ -8,6 +8,11 @@ class AdController extends Controller
 {
     public function show()
     {
-        return view('ad');
+        return view('ads.ad');
+    }
+
+    public function new()
+    {
+        return view('ads.new');
     }
 }
