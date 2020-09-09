@@ -15,4 +15,9 @@ class ProfileController extends Controller
     {
         return view('profile.view');
     }
+
+    public function listProfiles()
+    {
+        return view('profile.all');
+    }
 }

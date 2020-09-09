@@ -17,4 +17,6 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@index')->name('profile.index');
+Route::get('/profile/all', 'ProfileController@listProfiles')->name('profile.all')->middleware('auth');
 Route::get('/ad', 'AdController@show')->name('ad.show');
+Route::get('/ad/new', 'AdController@new')->name('ad.new')->middleware('auth');
