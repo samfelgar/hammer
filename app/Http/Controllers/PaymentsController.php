@@ -10,7 +10,10 @@ class PaymentsController extends Controller
     {
         return view('payments.view');
     }
-
+    public function all()
+    {
+        return view('payments.all');
+    }
 
 
 }
