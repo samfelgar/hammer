@@ -18,3 +18,6 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@index')->name('profile.index');
 Route::get('/ad', 'AdController@show')->name('ad.show');
+Route::get('/ad/service', 'AdController@service')->name('ad.service');
+Route::get('/payments', 'PaymentsController@index')->name('payments.view');
+

@@ -14,5 +14,10 @@ class AdController extends Controller
     public function new()
     {
         return view('ads.new');
+    }  
+    public function service()
+    {
+        return view('ads.service');
     }
+
 }
