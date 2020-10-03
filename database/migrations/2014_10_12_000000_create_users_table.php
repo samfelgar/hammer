@@ -18,7 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('senha');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreignId('person_id')->constrained();
+            $table->unsignedBigInteger('person_id');
+            $table->foreign('person_id')->references('id')->on('persons');
         });
     }
 

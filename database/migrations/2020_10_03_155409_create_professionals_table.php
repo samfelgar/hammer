@@ -15,7 +15,8 @@ class CreateProfessionalsTable extends Migration
     {
         Schema::create('professionals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('person_id')->constrained();
+            $table->unsignedBigInteger('person_id');
+            $table->foreign('person_id')->references('id')->on('persons');
             $table->timestamps();
         });
     }
