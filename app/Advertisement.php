@@ -13,6 +13,10 @@ class Advertisement extends Model
         'preco',
     ];
 
+    protected $dates = [
+        'data'
+    ];
+
     public function photos()
     {
         return $this->hasMany('App\Photo');
@@ -31,5 +35,18 @@ class Advertisement extends Model
     public function category()
     {
         return $this->belongsTo('App\Category');
+    }
+
+    /**
+     * @return string
+     */
+    public function getDataFormattedAttribute()
+    {
+        return $this->data->format('d/m/Y');
+    }
+
+    public function getPrecoFormattedAttribute()
+    {
+        return number_format($this->preco, 2, ',', '.');
     }
 }

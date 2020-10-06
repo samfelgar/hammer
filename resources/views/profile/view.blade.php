@@ -1,4 +1,6 @@
-@extends('layouts.profile')
+@extends('layouts.app')
+@section('sidebar')
+@endsection
 @section('content')
     <form action="" method="post">
         @csrf

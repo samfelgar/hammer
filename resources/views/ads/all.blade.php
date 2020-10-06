@@ -1,4 +1,6 @@
-@extends('layouts.profile')
+@extends('layouts.app')
+@section('sidebar')
+@endsection
 @section('content')
     <h1>Serviços</h1>
     <table class="table">

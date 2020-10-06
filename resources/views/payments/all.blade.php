@@ -1,4 +1,6 @@
-@extends('layouts.profile')
+@extends('layouts.app')
+@section('sidebar')
+@endsection
 @section('content')
     <h1>Pagamentos</h1>
     <table class="table">
@@ -29,7 +31,7 @@
                 <button class="btn btn-primary btn-sm">Visualizar</button>
                 <button class="btn btn-primary btn-sm">Confirmar</button>
                 <button class="btn btn-primary btn-sm">Deletar</button>
-                
+
             </td>
         </tr>
         </tbody>

@@ -1,4 +1,6 @@
-@extends('layouts.profile')
+@extends('layouts.app')
+@section('sidebar')
+@endsection
 @section('content')
     <h1>Prestadores de serviços</h1>
     <table class="table">

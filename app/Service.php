@@ -23,12 +23,12 @@ class Service extends Model
 
     public function professional()
     {
-        return $this->belongsTo('App\Professional');
+        return $this->belongsTo('App\Professional', 'person_id');
     }
 
     public function client()
     {
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo('App\Client', 'client_id');
     }
 
     public function invoice()
@@ -39,5 +39,10 @@ class Service extends Model
     public function feedback()
     {
         return $this->hasOne('App\Feedback');
+    }
+
+    public function getDataFormattedAttribute()
+    {
+        return $this->data->format('d/m/Y');
     }
 }
