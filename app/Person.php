@@ -2,11 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 abstract class Person extends Authenticatable
 {
+    const CLIENT = 0;
+    const PROFESSIONAL = 1;
+    const USER = 2;
 
     protected $fillable = [
         'nome',
@@ -15,10 +17,19 @@ abstract class Person extends Authenticatable
         'nascimento',
         'email',
         'foto',
+        'senha',
+        'tipo',
     ];
+
+    protected $table = 'people';
 
     protected $dates = [
         'nascimento',
+    ];
+
+    protected $hidden = [
+        'senha',
+        'remember_token',
     ];
 
     public function addresses()
@@ -31,19 +42,9 @@ abstract class Person extends Authenticatable
         return $this->hasMany('App\Phone');
     }
 
-    public function users()
+    public function getAuthPassword()
     {
-        return $this->hasMany('App\User');
-    }
-
-    public function clients()
-    {
-        return $this->hasMany('App\Client');
-    }
-
-    public function professionals()
-    {
-        return $this->hasMany('App\Professional');
+        return $this->senha;
     }
 
 }

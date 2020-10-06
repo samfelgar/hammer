@@ -2,18 +2,12 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Client extends Person
 {
-    public function person()
+    public function __construct(array $attributes = [])
     {
-        return $this->belongsTo('App\Person');
-    }
-
-    public function services()
-    {
-        return $this->hasMany('App\Service');
+        $this->tipo = parent::CLIENT;
+        parent::__construct($attributes);
     }
 
     public function paymentMethods()

@@ -23,8 +23,7 @@ class CreateAddressesTable extends Migration
             $table->string('cep', 15);
             $table->string('complemento')->nullable();
             $table->timestamps();
-            $table->unsignedBigInteger('person_id');
-            $table->foreign('person_id')->references('id')->on('persons');
+            $table->foreignId('person_id')->constrained();
         });
     }
 

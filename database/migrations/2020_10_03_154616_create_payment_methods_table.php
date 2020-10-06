@@ -18,7 +18,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('number');
             $table->date('valid_until');
             $table->string('holder');
-            $table->foreignId('client_id')->constrained();
+            $table->foreignId('person_id')->constrained();
             $table->timestamps();
         });
     }

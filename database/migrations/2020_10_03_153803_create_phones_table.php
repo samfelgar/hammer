@@ -17,8 +17,7 @@ class CreatePhonesTable extends Migration
             $table->id();
             $table->string('ddd');
             $table->string('numero');
-            $table->unsignedBigInteger('person_id');
-            $table->foreign('person_id')->references('id')->on('persons');
+            $table->foreignId('person_id')->constrained();
             $table->timestamps();
         });
     }

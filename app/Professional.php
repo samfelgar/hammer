@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Professional extends Person
 {
-    public function person()
+    public function __construct(array $attributes = [])
     {
-        return $this->belongsTo('App\Person');
+        $this->tipo = parent::PROFESSIONAL;
+        parent::__construct($attributes);
     }
 
     public function advertisements()

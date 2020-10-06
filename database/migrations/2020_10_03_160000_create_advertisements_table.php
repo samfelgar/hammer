@@ -19,7 +19,7 @@ class CreateAdvertisementsTable extends Migration
             $table->text('descricao');
             $table->date('data');
             $table->double('preco');
-            $table->foreignId('professional_id')->constrained();
+            $table->foreignId('person_id')->constrained();
             $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });
