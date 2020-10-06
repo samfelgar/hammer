@@ -26,5 +26,7 @@ Route::get('/ad/new', 'AdController@new')->name('ad.new')->middleware('auth');
 Route::get('/ad/search', 'AdController@search')->name('ad.search');
 Route::get('/ad/evaluation', 'AdController@evaluation')->name('ad.evaluation');
 Route::get('/ad/all', 'AdController@all')->name('ad.all');
+Route::get('/sobre', 'HomeController@sobre')->name('sobre');
+Route::get('/contato', 'HomeController@contato')->name('contato');
 
 
