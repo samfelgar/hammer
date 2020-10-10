@@ -22,5 +22,9 @@ Route::resource('professionals.advertisements', 'AdvertisementController')->shal
 Route::resource('clients', 'ClientController');
 Route::get('/sobre', 'HomeController@sobre')->name('sobre');
 Route::get('/contato', 'HomeController@contato')->name('contato');
+Route::resource('professionals', 'ProfessionalController');
+Route::get('/professionals/{professional}/dashboard', 'ProfessionalDashboardController@index')->name('professionals.dashboard');
+Route::resource('people.phones', 'PhoneController')->shallow()->except(['index', 'show']);
+Route::resource('people.addresses', 'AddressController')->shallow()->except(['index', 'show']);
 
 

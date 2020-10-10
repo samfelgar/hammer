@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-abstract class Person extends Authenticatable
+class Person extends Authenticatable
 {
     const CLIENT = 0;
     const PROFESSIONAL = 1;
     const USER = 2;
+
+    protected string $onEditRedirectTo = '';
 
     protected $fillable = [
         'nome',
@@ -32,6 +34,11 @@ abstract class Person extends Authenticatable
         'remember_token',
     ];
 
+    public function getAuthPassword()
+    {
+        return $this->senha;
+    }
+
     public function addresses()
     {
         return $this->hasMany('App\Address', 'person_id');
@@ -42,9 +49,9 @@ abstract class Person extends Authenticatable
         return $this->hasMany('App\Phone', 'person_id');
     }
 
-    public function getAuthPassword()
+    public function getCpfFormattedAttribute()
     {
-        return $this->senha;
+        return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})/', '$1.$2.$3-$4', $this->cpf);
     }
 
 }

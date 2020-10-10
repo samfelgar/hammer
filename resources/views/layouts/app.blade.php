@@ -81,15 +81,17 @@
     <main class="py-4">
         <div class="container">
             <div class="row">
-                <nav class="col-md-2">
-                    <p class="font-weight-bold">Categorias</p>
-                    <ul class="nav flex-column">
-                        <li class="nav-item"><a href="#" class="nav-link">Pintura</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Gesso</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Alvenaria</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Pisos</a></li>
-                    </ul>
-                </nav>
+                @section('sidebar')
+                    <nav class="col-md-2">
+                        <p class="font-weight-bold">Categorias</p>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a href="#" class="nav-link">Pintura</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link">Gesso</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link">Alvenaria</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link">Pisos</a></li>
+                        </ul>
+                    </nav>
+                @show
                 <div class="col">
                     @yield('content')
                 </div>

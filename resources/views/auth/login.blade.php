@@ -1,17 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <script>
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '616174542658740',
-                autoLogAppEvents: true,
-                xfbml: true,
-                version: 'v8.0'
-            });
-        };
-    </script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <div class="row">
         <div class="col-md">
             <form method="post" action="{{ route('login') }}" class="row justify-content-center">
