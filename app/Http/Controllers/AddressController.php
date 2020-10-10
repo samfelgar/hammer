@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Person;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -19,11 +20,17 @@ class AddressController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param Request $request
+     * @param Person $person
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, Person $person)
     {
-        //
+        $redirectTo = $request->query('redirectTo') ?? null;
+        return response()->view('addresses.create', [
+            'person' => $person,
+            'redirectTo' => $redirectTo,
+        ]);
     }
 
     /**

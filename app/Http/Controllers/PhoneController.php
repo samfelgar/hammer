@@ -22,8 +22,8 @@ class PhoneController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param Request $request
      * @param Person $person
-     * @param $action
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request, Person $person)
