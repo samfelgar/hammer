@@ -34,12 +34,12 @@ abstract class Person extends Authenticatable
 
     public function addresses()
     {
-        return $this->hasMany('App\Address');
+        return $this->hasMany('App\Address', 'person_id');
     }
 
     public function phones()
     {
-        return $this->hasMany('App\Phone');
+        return $this->hasMany('App\Phone', 'person_id');
     }
 
     public function getAuthPassword()

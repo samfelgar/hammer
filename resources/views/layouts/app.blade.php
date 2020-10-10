@@ -61,7 +61,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="{{ route('profile.index') }}" class="dropdown-item">Meus dados</a>
+                                <a href="{{ route('clients.edit', [$client]) }}" class="dropdown-item">Meus dados</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
