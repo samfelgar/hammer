@@ -5,6 +5,7 @@
     <h3>Alterar dados pessoais</h3>
     <form action="{{ route('professionals.update', [$professional]) }}" method="post">
         @csrf
+        @method('put')
         <div class="form-row">
             <div class="col-sm-6 form-group">
                 <label for="nome">Nome</label>
@@ -26,7 +27,7 @@
             </div>
             <div class="col-sm-2">
                 <label for="nascimento">Nascimento</label>
-                <input type="text" class="form-control @error('nascimento') is-invalid @enderror" name="nascimento" id="nascimento" required value="{{ $professional->nascimento->format('d/m/Y') }}">
+                <input type="date" class="form-control @error('nascimento') is-invalid @enderror" name="nascimento" id="nascimento" required value="{{ $professional->nascimento->format('Y-m-d') }}">
                 @error('nascimento')
                 <div class="invalid-feedback">
                     {{ $message }}

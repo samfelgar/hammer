@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\ProfessionalController;
 use Illuminate\Database\Eloquent\Model;
 
 class Professional extends Person
@@ -30,4 +31,5 @@ class Professional extends Person
     {
         return parent::all()->where('tipo', parent::PROFESSIONAL);
     }
+
 }

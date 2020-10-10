@@ -13,6 +13,6 @@ class Phone extends Model
 
     public function person()
     {
-        return $this->belongsTo('App\Person');
+        return $this->belongsTo('App\Person', 'person_id');
     }
 }

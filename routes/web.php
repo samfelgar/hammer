@@ -28,7 +28,9 @@ Route::get('/ad/evaluation', 'AdController@evaluation')->name('ad.evaluation');
 Route::get('/ad/all', 'AdController@all')->name('ad.all');
 Route::get('/sobre', 'HomeController@sobre')->name('sobre');
 Route::get('/contato', 'HomeController@contato')->name('contato');
-Route::resource('/professionals', 'ProfessionalController');
+Route::resource('professionals', 'ProfessionalController');
 Route::get('/professionals/{professional}/dashboard', 'ProfessionalDashboardController@index')->name('professionals.dashboard');
+Route::resource('people.phones', 'PhoneController')->shallow()->except(['index', 'show']);
+Route::resource('people.addresses', 'AddressController')->shallow();
 
 

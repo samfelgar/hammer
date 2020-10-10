@@ -10,15 +10,15 @@ class ProfessionalDashboardController extends Controller
 {
     /**
      * @param Professional $professional
+     * @return \Illuminate\Http\Response
      * @throws ProfessionalNotFoundException
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index(Professional $professional)
     {
         if ($professional->tipo !== Professional::PROFESSIONAL) {
             throw new ProfessionalNotFoundException();
         }
-        return view('professionals.dashboard', [
+        return response()->view('professionals.dashboard', [
             'professional' => $professional,
         ]);
     }
