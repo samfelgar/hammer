@@ -54,4 +54,9 @@ class Person extends Authenticatable
         return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})/', '$1.$2.$3-$4', $this->cpf);
     }
 
+    public function setCpfAttribute(string $cpf)
+    {
+        $this->attributes['cpf'] = preg_replace('/[^0-9]/', '', $cpf);
+    }
+
 }
