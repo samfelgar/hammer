@@ -13,7 +13,7 @@ class StoreAdvertisement extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,8 +26,8 @@ class StoreAdvertisement extends FormRequest
         return [
             'titulo' => 'required',
             'descricao' => 'required',
-            'categorias' => 'required',
-            'preco' => 'required'
+            'categoria' => 'required',
+            'preco' => 'required',
         ];
     }
 }

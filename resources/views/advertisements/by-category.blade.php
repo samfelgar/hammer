@@ -1,6 +1,8 @@
 @extends('layouts.app')
+
 @section('content')
-    <h1 class="">Todos os Anuncios</h1>
+
+
     <div>
         <div class="row">
             @foreach($advertisements as $item)
@@ -19,4 +21,5 @@
             @endforeach
         </div>
     </div>
+
 @endsection

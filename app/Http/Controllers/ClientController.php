@@ -51,7 +51,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -83,10 +83,10 @@ class ClientController extends Controller
             'nascimento' => 'required',
         ]);
         $data['password'] = Hash::make($data['password']);
-        
+
         $client->fill($data)->save();
 
-        return redirect()->route('clients.edit', [$client])->with('success', 'O cliente foi atualizado com sucesso!');
+        return redirect()->route('professional.', [$client])->with('success', 'O cliente foi atualizado com sucesso!');
     }
 
     /**

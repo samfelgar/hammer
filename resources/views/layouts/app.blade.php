@@ -62,6 +62,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a href="#" class="dropdown-item">Meus dados</a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -85,10 +86,15 @@
                     <nav class="col-md-2">
                         <p class="font-weight-bold">Categorias</p>
                         <ul class="nav flex-column">
-                            <li class="nav-item"><a href="#" class="nav-link">Pintura</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">Gesso</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">Alvenaria</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">Pisos</a></li>
+                            @foreach(\App\Category::all() as $category)
+                            <li class="nav-item">
+                                <a href="{{route('category.advertisements', [$category])}}" class="nav-link">{{ $category->nome }}</a>
+                            </li>
+                           @endforeach
+                            <li class="nav-item">
+                                <a href="{{route('advertisements.all')}}" class="nav-link">Todos</a>
+                            </li>
+
                         </ul>
                     </nav>
                 @show

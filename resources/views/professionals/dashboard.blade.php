@@ -54,7 +54,8 @@
                     <td>{{ $advertisement->preco_formatted }}</td>
                     <td>{{ $advertisement->category->nome }}</td>
                     <td>
-                        <a href="#" class="btn btn-danger">Pausar anúncio</a>
+                        <a href="#" class="btn btn-danger btn-sm">Pausar anúncio</a>
+                        <a href="{{route('advertisements.edit', $advertisement)}}" class="btn btn-primary btn-sm">Editar Anuncio</a>
                     </td>
                 </tr>
             @empty

@@ -24,7 +24,7 @@ class Advertisement extends Model
 
     public function professional()
     {
-        return $this->belongsTo('App\Professional');
+        return $this->belongsTo('App\Person', 'person_id');
     }
 
     public function services()
