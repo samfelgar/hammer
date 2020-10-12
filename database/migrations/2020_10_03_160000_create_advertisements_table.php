@@ -22,6 +22,7 @@ class CreateAdvertisementsTable extends Migration
             $table->foreignId('person_id')->constrained();
             $table->foreignId('category_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
