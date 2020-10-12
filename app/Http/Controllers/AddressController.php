@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
+use App\Http\Requests\StoreAddress;
 use App\Person;
 use Illuminate\Http\Request;
 
@@ -36,18 +38,31 @@ class AddressController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreAddress $request
+     * @param Person $person
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
-    public function store(Request $request)
+    public function store(StoreAddress $request, Person $person)
     {
-        //
+        try {
+            $redirectTo = $request->query('redirectTo') ?? null;
+            if (empty($redirectTo)) {
+                throw new \Exception('Acesso não permitido.');
+            }
+            $address = new Address();
+            $address->fill($request->validated());
+            $person->addresses()->save($address);
+            return redirect($redirectTo);
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -58,34 +73,61 @@ class AddressController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param Address $address
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, Address $address)
     {
-        //
+        $redirectTo = $request->query('redirectTo') ?? null;
+        return response()->view('addresses.edit', [
+            'address' => $address,
+            'redirectTo' => $redirectTo,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
-    public function update(Request $request, $id)
+    public function update(StoreAddress $request, Address $address)
     {
-        //
+        try {
+            $redirectTo = $request->query('redirectTo');
+            if (empty($redirectTo)) {
+                throw new \Exception('Acesso não permitido');
+            }
+            $address->fill($request->validated());
+            $address->save();
+            return redirect($redirectTo);
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Address $address
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Request $request, Address $address)
     {
-        //
+        try {
+            $redirectTo = $request->query('redirectTo');
+            if (empty($redirectTo)) {
+                throw new \Exception('Acesso não permitido.');
+            }
+            $address->delete();
+            return redirect($redirectTo);
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 }
