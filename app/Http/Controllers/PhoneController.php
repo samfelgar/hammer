@@ -61,7 +61,7 @@ class PhoneController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -72,34 +72,61 @@ class PhoneController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param Phone $phone
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, Phone $phone)
     {
-        //
+        $redirect = $request->query('redirectTo');
+        return response()->view('phones.edit', [
+            'phone' => $phone,
+            'redirectTo' => $redirect,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StorePhone $request
+     * @param Phone $phone
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
+     * @throws \Exception
      */
-    public function update(Request $request, $id)
+    public function update(StorePhone $request, Phone $phone)
     {
-        //
+        try {
+            $redirectTo = $request->query('redirectTo') ?? null;
+            if (empty($redirectTo)) {
+                throw new \Exception('Acesso não permitido.');
+            }
+            $phone->fill($request->validated());
+            $phone->save();
+            return redirect($redirectTo);
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Phone $phone
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Request $request, Phone $phone)
     {
-        //
+        try {
+            $redirectTo = $request->query('redirectTo');
+            if (empty($redirectTo)) {
+                throw new \Exception('Acesso não permitido');
+            }
+            $phone->delete();
+            return redirect($redirectTo);
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 }
