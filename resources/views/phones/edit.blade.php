@@ -29,6 +29,7 @@
         <div class="form-row">
             <div class="col-sm">
                 <button class="btn btn-primary">Salvar</button>
+                <a class="btn btn-secondary" href="{{url()->previous()}}">Voltar</a>
             </div>
         </div>
     </form>
