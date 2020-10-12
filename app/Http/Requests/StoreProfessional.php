@@ -28,7 +28,7 @@ class StoreProfessional extends FormRequest
             'email' => 'required|unique:people',
             'nascimento' => 'required|date',
             'rg' => 'required',
-            'cpf' => 'required',
+            'cpf' => 'required|cpf',
             'telefone' => 'nullable',
             'celular' => 'nullable',
             'senha' => 'required|confirmed'
