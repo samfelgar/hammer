@@ -6,8 +6,10 @@ use App\Category;
 use App\Http\Requests\StoreAdvertisement;
 use App\Professional;
 use App\Advertisement;
+use App\Phone;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdvertisementController extends Controller
 {
@@ -16,9 +18,11 @@ class AdvertisementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Advertisement $advertisement)
     {
-        //
+        return view('advertisements.all', [
+            'advertisements' => Advertisement::all(),
+        ]);
     }
 
     /**
@@ -38,8 +42,8 @@ class AdvertisementController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreAdvertisement $request, Professional $professional)
     {
@@ -57,41 +61,57 @@ class AdvertisementController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Advertisement $advertisement
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(Advertisement $advertisement)
     {
-        //
+
+        $person = Professional::find($advertisement->person_id);
+        return view('advertisements.ad', [
+            'advertisements' => $advertisement,
+            'professional' => $person,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Advertisement $advertisement
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Advertisement $advertisement)
     {
-        //
+        return view('advertisements.edit', [
+            'advertisements' => $advertisement,
+            'categories' => Category::all(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Advertisement $advertisement
+     * @return void
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Advertisement $advertisement)
     {
-        //
+        $category = Category::find($request->categoria);
+        $advertisement->category()->associate($category);
+        $data = $request->validate([
+            'titulo' => 'required',
+            'preco' => 'required',
+            'descricao' => 'required',
+        ]);
+        $advertisement->fill($data)->save();
+        return redirect()->route('professionals.dashboard', $advertisement->person_id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

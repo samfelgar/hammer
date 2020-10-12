@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Advertisement;
+use App\Category;
 
 class HomeController extends Controller
 {
@@ -14,8 +16,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        $ad = Advertisement::latest()->limit(12)->get();
+        $featured = $ad->slice(0,3);
         return view('home', [
             'client' => Auth::user(),
+            'advertisements' => $ad,
+            'featured' => $featured,
+            'categorias' => Category::all(),
         ]);
     }
     public function sobre()
@@ -26,4 +34,5 @@ class HomeController extends Controller
     {
         return view('contato');
     }
+
 }
