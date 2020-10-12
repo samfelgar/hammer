@@ -71,9 +71,9 @@
                             <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Data de Nascimento') }}</label>
 
                             <div class="col-md-6">
-                                <input id="date" type="date" class="form-control @error('rg') is-invalid @enderror" name="dataNascimento" value="{{ old('dataNascimento') }}" required autocomplete="dataNascimento" autofocus>
+                                <input id="date" type="date" class="form-control @error('nascimento') is-invalid @enderror" name="nascimento" value="{{ old('nascimento') }}" required autocomplete="dataNascimento" autofocus>
 
-                                @error('dataNascimento')
+                                @error('nascimento')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
