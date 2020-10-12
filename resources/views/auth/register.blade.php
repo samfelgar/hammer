@@ -66,7 +66,7 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Data de Nascimento') }}</label>
 
@@ -119,10 +119,13 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="offset-md-4">
+                                <div class="col-sm">
+                                    <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
-                                </button>
+                                    </button>
+                                    <a class="btn btn-secondary" href="{{url()->previous()}}">Voltar</a>
+                                </div>
                             </div>
                         </div>
                     </form>
