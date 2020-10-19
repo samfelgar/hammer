@@ -28,7 +28,7 @@
             </div>
             <div class="col-sm-2">
                 <label for="nascimento">Nascimento</label>
-                <input type="date" class="form-control @error('nascimento') is-invalid @enderror" name="nascimento"
+                <input type="text" class="form-control @error('nascimento') is-invalid @enderror" name="nascimento"
                        id="nascimento" required value="{{ old('nascimento') }}">
                 @error('nascimento')
                 <div class="invalid-feedback">
