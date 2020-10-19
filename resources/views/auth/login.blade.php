@@ -54,27 +54,6 @@
             <h3>Acesse pelas redes sociais</h3>
             <button class="btn btn-lg btn-primary">Facebook</button>
             <button class="btn btn-lg btn-outline-secondary">Google</button>
-
-            <hr>
-
-            <h3>Ou cadastre-se</h3>
-            <form method="post">
-                @csrf
-                <div class="form-group">
-                    <label for="register-name">Nome
-                        <completo></completo>
-                    </label>
-                    <input type="text" id="register-name" name="register-name" placeholder="Informe seu nome completo"
-                           class="form-control"
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="register-email">E-mail</label>
-                    <input type="email" name="register-email" id="register-email" placeholder="Informe seu e-mail"
-                           class="form-control"/>
-                </div>
-                <button class="btn btn-primary" type="submit">Cadastrar</button>
-            </form>
         </div>
     </div>
 @endsection

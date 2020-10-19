@@ -49,9 +49,9 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Client $client)
     {
-
+        return view('clients.show', ['client' => $client]);
     }
 
     /**
@@ -62,7 +62,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view('clients.view', ['client' => $client]);
+        return view('clients.edit', ['client' => $client]);
     }
 
     /**
@@ -86,7 +86,7 @@ class ClientController extends Controller
 
         $client->fill($data)->save();
 
-        return redirect()->route('professional.', [$client])->with('success', 'O cliente foi atualizado com sucesso!');
+        return redirect()->route('clients.show', [$client])->with('success', 'O cliente foi atualizado com sucesso!');
     }
 
     /**
