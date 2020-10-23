@@ -21,7 +21,7 @@
     <div class="form-group row">
         <label for="price" class="col-sm-2 col-form-label">Valor</label>
         <div class="col-sm-4">
-            <input type="text" name="preco" id="price" class="form-control @error('preco') is-invalid @enderror">
+            <input type="text" name="preco" id="valor" class="form-control @error('preco') is-invalid @enderror">
             @error('preco')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>

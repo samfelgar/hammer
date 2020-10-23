@@ -16,8 +16,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/payments', 'PaymentsController@index')->name('payments.view');
-Route::get('/payments/all', 'PaymentsController@all')->name('payments.all');
+Route::resource('clients.payments', 'PaymentMethodController')->shallow()->except(['index', 'show', 'edit']);
 Route::get('/advertisements/all', 'AdvertisementController@index')->name('advertisements.all');
 Route::resource('professionals.advertisements', 'AdvertisementController')->shallow()->except(['index']);
 Route::resource('clients', 'ClientController');
