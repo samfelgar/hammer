@@ -20,6 +20,7 @@ Route::resource('clients.payments', 'PaymentMethodController')->shallow()->excep
 Route::get('/advertisements/all', 'AdvertisementController@index')->name('advertisements.all');
 Route::resource('professionals.advertisements', 'AdvertisementController')->shallow()->except(['index']);
 Route::resource('clients', 'ClientController');
+Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
 Route::get('/sobre', 'HomeController@sobre')->name('sobre');
 Route::get('/contato', 'HomeController@contato')->name('contato');
 Route::resource('professionals', 'ProfessionalController');

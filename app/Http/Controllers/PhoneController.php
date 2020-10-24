@@ -118,6 +118,7 @@ class PhoneController extends Controller
      */
     public function destroy(Request $request, Phone $phone)
     {
+
         try {
             $redirectTo = $request->query('redirectTo');
             if (empty($redirectTo)) {
