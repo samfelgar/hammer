@@ -12,6 +12,6 @@ class Client extends Person
 
     public function paymentMethods()
     {
-        return $this->hasMany('App\PaymentMethod');
+        return $this->hasMany('App\PaymentMethod', 'person_id');
     }
 }

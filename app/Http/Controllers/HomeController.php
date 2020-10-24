@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Person;
+use App\Professional;
+use App\User;
+use App\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Advertisement;
@@ -35,4 +39,22 @@ class HomeController extends Controller
         return view('contato');
     }
 
+    //Funçao para redirecionar pro lugar certo
+
+    public function meusDados()
+    {
+        switch (Auth::user()->tipo){
+            case 0:
+                $client = Client::find(Auth::user()->id);
+                return redirect()->route('clients.show', $client);
+                break;
+
+            case 1:
+                $professional = Professional::find(Auth::user()->id);
+                return redirect()->route('professionals.show', $professional);
+                break;
+            case null:
+                return route('home');
+        }
+    }
 }

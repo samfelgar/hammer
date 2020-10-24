@@ -129,4 +129,43 @@
             </table>
         </div>
     </div>
+    <div class="form-row">
+        <div class="col-sm">
+            <h5>Metodo de Pagamento <a
+                    href="{{ route('clients.payments.create', [$client, 'redirectTo' => url()->current()]) }}"
+                    class="btn btn-sm btn-primary">novo</a></h5>
+            <table class="table table-sm">
+                <thead>
+                <tr>
+                    <th>Nome no Cartão</th>
+                    <th>Número do Cartão</th>
+                    <th>Data de Validade</th>
+                    <th>Opções</th>
+                </tr>
+                </thead>
+                <tbody>
+                @forelse($client->paymentMethods as $paymentMethod)
+                    <tr>
+                        <td>{{ $paymentMethod->holder }}</td>
+                        <td>{{ $paymentMethod->number }}</td>
+                        <td>{{ $paymentMethod->valid_until }}</td>
+                        <td>
+                            <form
+                                action="{{ route('payments.destroy', [$paymentMethod, 'redirectTo' => url()->current()]) }}"
+                                method="post" class="d-inline">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger btn-sm" type="submit">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="3">Sem pagamentos cadastrados.</td>
+                    </tr>
+                @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endsection
