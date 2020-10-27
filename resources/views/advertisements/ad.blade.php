@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <p class="mt-1"><span class="h3">{{ number_format($advertisements->preco, 2, ',', '.') }}</span>/dia</p>
+            <p class="mt-1"><span class="h3" id="">{{ $advertisements->preco_formatted }}</span>/dia</p>
             <a href="{{ route('advertisements.services.create', [$advertisements]) }}" class="btn btn-primary btn-block btn-lg">Contratar</a>
             <a class="btn btn-secondary mt-2" href="{{url()->previous()}}">Voltar</a>
         </div>
