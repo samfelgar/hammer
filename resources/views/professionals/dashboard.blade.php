@@ -35,7 +35,12 @@
         </table>
     </div>
     <div class="mt-4">
-        <h4>Meus anúncios</h4>
+        <div class="d-flex justify-content-between mb-2">
+            <h4>Meus anúncios</h4>
+            <div>
+                <a href="{{ route('professionals.advertisements.create', [$professional]) }}" class="btn btn-primary btn-sm">Novo anúncio</a>
+            </div>
+        </div>
         <table class="table table-hover">
             <thead>
             <tr>
