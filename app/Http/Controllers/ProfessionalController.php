@@ -54,6 +54,7 @@ class ProfessionalController extends Controller
      */
     public function show(Professional $professional)
     {
+        $this->authorize('view' , $professional);
         return response()->view('professionals.show', [
             'professional' => $professional,
         ]);
@@ -67,6 +68,7 @@ class ProfessionalController extends Controller
      */
     public function edit(Professional $professional)
     {
+        $this->authorize('update' , $professional);
         return response()->view('professionals.edit', [
             'professional' => $professional
         ]);

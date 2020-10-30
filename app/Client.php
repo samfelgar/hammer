@@ -4,6 +4,10 @@ namespace App;
 
 class Client extends Person
 {
+    /**
+     * @var mixed
+     */
+
     public function __construct(array $attributes = [])
     {
         $this->tipo = parent::CLIENT;
