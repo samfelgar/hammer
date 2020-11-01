@@ -19,7 +19,7 @@ class CategorySeeder extends Seeder
             ['nome' => 'Marcenaria',],
             ['nome' => 'Elétrica',],
             ['nome' => 'Hidráulica',],
-            ['nome' => 'Porcelanado',],
+            ['nome' => 'Porcelanato',],
             ['nome' => 'Antenista',],
             ['nome' => 'Serralheria',],
             ['nome' => 'Chaveiro',],

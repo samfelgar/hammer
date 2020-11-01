@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\StoreAdvertisement;
+use App\Photo;
 use App\Professional;
 use App\Advertisement;
 use App\Phone;
@@ -53,6 +54,13 @@ class AdvertisementController extends Controller
         $advertisement->data = new Carbon();
         $advertisement->category()->associate($category);
         $professional->advertisements()->save($advertisement);
+        if ($request->has('photo')) {
+            $photo = new Photo();
+            $photo->path = $request->photo->store('advertisements');
+            $photo->mime = $request->photo->getMimeType();
+            $photo->descricao = $advertisement->titulo;
+            $advertisement->photos()->save($photo);
+        }
         return redirect()->route('professionals.dashboard', [
             $professional
         ]);
@@ -66,7 +74,6 @@ class AdvertisementController extends Controller
      */
     public function show(Advertisement $advertisement)
     {
-
         $person = Professional::find($advertisement->person_id);
         return view('advertisements.ad', [
             'advertisements' => $advertisement,
@@ -93,7 +100,7 @@ class AdvertisementController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param Advertisement $advertisement
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Advertisement $advertisement)
     {

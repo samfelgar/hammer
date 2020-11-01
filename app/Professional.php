@@ -20,7 +20,7 @@ class Professional extends Person
 
     public function services()
     {
-        return $this->hasMany('App\Service', 'person_id');
+        return $this->hasManyThrough('App\Service', 'App\Advertisement', 'person_id');
     }
 
     /**
@@ -29,7 +29,7 @@ class Professional extends Person
      */
     public static function all($columns = ['*'])
     {
-        return parent::all()->where('tipo', parent::PROFESSIONAL);
+        return parent::all($columns)->where('tipo', parent::PROFESSIONAL);
     }
 
 }

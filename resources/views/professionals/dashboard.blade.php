@@ -8,7 +8,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>Previsão término</th>
+                <th>Início</th>
                 <th>OS</th>
                 <th>Status</th>
                 <th>Data de solicitação</th>
@@ -18,12 +18,12 @@
             <tbody>
             @forelse($professional->services as $service)
                 <tr>
-                    <td>{{ $service->data }}</td>
                     <td>{{ $service->data_formatted }}</td>
-                    <td>{{ $service->status }}</td>
+                    <td>{{ $service->os }}</td>
+                    <td>{{ $service->status->label }}</td>
                     <td>{{ $service->created_at->format('d/m/Y') }}</td>
                     <td>
-                        <a href="#" class="btn btn-info">Ver andamento</a>
+                        <a href="#" class="btn btn-sm btn-primary">Ver andamento</a>
                     </td>
                 </tr>
             @empty

@@ -15,4 +15,14 @@ class Phone extends Model
     {
         return $this->belongsTo('App\Person', 'person_id');
     }
+
+    public function getFullPhoneAttribute()
+    {
+        return "({$this->ddd}) {$this->numero}";
+    }
+
+    public function __toString()
+    {
+        return $this->getFullPhoneAttribute();
+    }
 }

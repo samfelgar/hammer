@@ -37787,6 +37787,7 @@ $jscomp.polyfill("Array.prototype.find", function (a) {
 /***/ (function(module, exports) {
 
 $('#nascimento').mask('00/00/0000');
+$('.date').mask('00/00/0000');
 $('#cpf').mask('000.000.000-00');
 $('#cc_card').mask("0000 0000 0000 0000");
 $('#valor').mask("#,##0.00", {
@@ -37825,8 +37826,8 @@ $('#celular').mask(SPMaskBehavior, spOptions);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/daniel/workspace/apps/hammer/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/daniel/workspace/apps/hammer/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/samuel/www/hammer/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/samuel/www/hammer/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
