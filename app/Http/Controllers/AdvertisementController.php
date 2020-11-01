@@ -33,7 +33,7 @@ class AdvertisementController extends Controller
      */
     public function create(Professional $professional)
     {
-
+        $this->authorizeResource('create', $professional);
         return response()->view('advertisements.create', [
             'professional' => $professional,
             'categories' => Category::all(),
@@ -48,6 +48,7 @@ class AdvertisementController extends Controller
      */
     public function store(StoreAdvertisement $request, Professional $professional)
     {
+        $this->authorize('create', $professional);
         $category = Category::find($request->categoria);
         $advertisement = new Advertisement();
         $advertisement->fill($request->validated());
@@ -64,6 +65,9 @@ class AdvertisementController extends Controller
         return redirect()->route('professionals.dashboard', [
             $professional
         ]);
+
+
+
     }
 
     /**
@@ -89,6 +93,7 @@ class AdvertisementController extends Controller
      */
     public function edit(Advertisement $advertisement)
     {
+        $this->authorizeResource('update', $advertisement);
         return view('advertisements.edit', [
             'advertisements' => $advertisement,
             'categories' => Category::all(),
@@ -104,6 +109,7 @@ class AdvertisementController extends Controller
      */
     public function update(Request $request, Advertisement $advertisement)
     {
+        $this->authorizeResource('update', $advertisement);
         $category = Category::find($request->categoria);
         $advertisement->category()->associate($category);
         $data = $request->validate([
@@ -121,8 +127,32 @@ class AdvertisementController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Advertisement $advertisement)
     {
-        //
+        $this->authorizeResource('update', $advertisement);
+        try {
+            if (empty($advertisement)) {
+                throw new \Exception('Acesso não permitido.');
+
+            }
+
+            $advertisement->delete();
+            return redirect()->route('professionals.dashboard', $advertisement->professional);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * Retira a exclusão do Anuncio
+     *
+     * @param Advertisement $advertisement
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
+     */
+    public function restore($advertisement)
+    {
+        Advertisement::withTrashed()->where('id', $advertisement)->restore();
+        return redirect(url()->previous());
+
     }
 }

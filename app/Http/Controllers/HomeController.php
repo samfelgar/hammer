@@ -20,7 +20,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $ad = Advertisement::latest()->limit(12)->get();
         $featured = $ad->slice(0,3);
         return view('home', [

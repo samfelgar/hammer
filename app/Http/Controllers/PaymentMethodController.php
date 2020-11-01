@@ -95,7 +95,7 @@ class PaymentMethodController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function destroy(Request $request, PaymentMethod $payment)
+    public function destroy(Request $request, PaymentMethod $paymentMethod)
     {
 
         try {
@@ -103,7 +103,7 @@ class PaymentMethodController extends Controller
             if (empty($redirectTo)) {
                 throw new \Exception('Acesso não permitido.');
             }
-            $payment->delete();
+            $paymentMethod->delete();
             return redirect($redirectTo);
         } catch (\Exception $e) {
             throw $e;

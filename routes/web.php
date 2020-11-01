@@ -21,6 +21,7 @@ Route::resource('clients.payments', 'PaymentMethodController')->shallow()->excep
 Route::resource('advertisements.services', 'ServiceController')->shallow();
 Route::get('/advertisements/all', 'AdvertisementController@index')->name('advertisements.all');
 Route::resource('professionals.advertisements', 'AdvertisementController')->shallow()->except(['index']);
+Route::post('/advertisements/{advertisement}/restore', 'AdvertisementController@restore')->name('advertisements.restore');
 Route::resource('clients', 'ClientController');
 Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
 Route::get('/sobre', 'HomeController@sobre')->name('sobre');

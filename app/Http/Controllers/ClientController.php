@@ -6,12 +6,16 @@ use App\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Symfony\Component\HttpKernel\Profiler\Profile;
-use App\Providers\RouteServiceProvider;
 
 
 class ClientController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Client::class, 'client');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -74,6 +78,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
+        $this->authorize('update' , $client);
         $data = $request->validate([
             'password' => 'nullable|confirmed',
             'nome' => 'required',
