@@ -40,6 +40,11 @@ class ClientPolicy
         return $person->id === $client->id;
     }
 
+    public function dashboard(Person $person, Client $client)
+    {
+        return $person->id === $client->id;
+    }
+
     /**
      * Determine whether the user can create models.
      *

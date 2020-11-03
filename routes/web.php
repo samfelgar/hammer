@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/clients/dashboard', 'ClientController@dashboard')->name('clients.dashboard');
 Route::resource('clients.payments', 'PaymentMethodController')->shallow()->except(['index', 'show', 'edit']);
 Route::resource('advertisements.services', 'ServiceController')->shallow();
 Route::get('/advertisements/all', 'AdvertisementController@index')->name('advertisements.all');

@@ -10,6 +10,7 @@
                 @method('delete')
                 <button class="btn btn-danger" type="submit">Cancelar serviço</button>
             </form>
+            <a href="{{ route('clients.dashboard') }}" class="btn btn-primary">Meus serviços</a>
         </div>
     </div>
     <div class="row my-3">

@@ -39,7 +39,7 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -50,19 +50,28 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Client $client
+     * @return \Illuminate\View\View
      */
     public function show(Client $client)
     {
         return view('clients.show', ['client' => $client]);
     }
 
+    public function dashboard(Request $request)
+    {
+        $client = $request->user();
+        $this->authorize('dashboard', $client);
+        return view('clients.dashboard', [
+            'client' => $client,
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\View\View
      */
     public function edit(Client $client)
     {
@@ -72,13 +81,14 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Client $client
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, Client $client)
     {
-        $this->authorize('update' , $client);
+        $this->authorize('update', $client);
         $data = $request->validate([
             'password' => 'nullable|confirmed',
             'nome' => 'required',
@@ -97,7 +107,7 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
