@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('sidebar')
-    @endsection
+@endsection
 @section('content')
     <div class="text-center text-muted">
         <h4>Ops, profissional não encontrado.</h4>

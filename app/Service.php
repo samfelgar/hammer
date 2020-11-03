@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
@@ -23,12 +24,17 @@ class Service extends Model
 
     public function professional()
     {
-        return $this->belongsTo('App\Professional', 'person_id');
+        return $this->hasOneThrough('App\Professional', 'App\Advertisement', 'person_id');
     }
 
     public function client()
     {
-        return $this->belongsTo('App\Client', 'client_id');
+        return $this->hasOneThrough('App\Client', 'App\PaymentMethod', 'person_id');
+    }
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo('App\PaymentMethod');
     }
 
     public function invoice()
@@ -44,5 +50,10 @@ class Service extends Model
     public function getDataFormattedAttribute()
     {
         return $this->data->format('d/m/Y');
+    }
+
+    public function getStatusAttribute($status)
+    {
+        return new Status($status);
     }
 }

@@ -17,6 +17,11 @@ class PaymentMethod extends Model
         return $this->belongsTo('App\Client', 'person_id');
     }
 
+    public function services()
+    {
+        return $this->hasMany('App\Service');
+    }
+
     public function setNumberAttribute(string $number)
     {
         $this->attributes['number'] = preg_replace('/[^0-9]/', '', $number);

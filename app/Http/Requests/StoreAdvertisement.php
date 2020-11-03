@@ -28,6 +28,7 @@ class StoreAdvertisement extends FormRequest
             'descricao' => 'required',
             'categoria' => 'required',
             'preco' => 'required',
+            'photo' => 'file|nullable|mimes:jpeg,png',
         ];
     }
 }
