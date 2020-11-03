@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Http\Controllers\ProfessionalController;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Professional extends Person
@@ -11,6 +12,13 @@ class Professional extends Person
     {
         $this->tipo = parent::PROFESSIONAL;
         parent::__construct($attributes);
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('professional', function (Builder $builder) {
+            $builder->where('tipo', self::PROFESSIONAL);
+        });
     }
 
     public function advertisements()
@@ -31,5 +39,6 @@ class Professional extends Person
     {
         return parent::all()->where('tipo', parent::PROFESSIONAL);
     }
+
 
 }

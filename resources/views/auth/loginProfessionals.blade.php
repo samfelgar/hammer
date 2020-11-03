@@ -3,10 +3,10 @@
 @section('content')
     <div class="row">
         <div class="col-md">
-            <form method="post" action="{{ route('login') }}" class="row justify-content-center">
+            <form method="post" action="{{ route('login.professional.post') }}" class="row justify-content-center">
                 @csrf
                 <div class="col-9">
-                    <h1 class="h3 mb-3 font-weight-normal">Login de clientes</h1>
+                    <h1 class="h3 mb-3 font-weight-normal">Login de profissionais</h1>
                     <div class="form-group">
                         <label for="inputEmail" class="sr-only">{{ __('E-Mail Address') }}</label>
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -51,14 +51,11 @@
             </form>
         </div>
         <div class="col-md">
-            <div>
-                <h3>Acesse pelas redes sociais</h3>
-                <button class="btn btn-lg btn-primary">Facebook</button>
-                <button class="btn btn-lg btn-outline-secondary">Google</button>
-                <h3 class="mt-2">Sou Profissional</h3>
-                <a href="{{route('login.professional')}}" class="btn btn-lg btn-dark">Profissional</a>
-            </div>
+            <h3>Acesse pelas redes sociais</h3>
+            <button class="btn btn-lg btn-primary">Facebook</button>
+            <button class="btn btn-lg btn-outline-secondary">Google</button>
+            <h3 class="mt-2">Ou registre-se</h3>
+            <a href="{{route('professionals.create')}}" class="btn btn-lg btn-primary">Registrar</a>
         </div>
-
     </div>
 @endsection

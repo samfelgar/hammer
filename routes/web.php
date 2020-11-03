@@ -15,20 +15,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-
 Route::get('/', 'HomeController@index')->name('home');
-Route::resource('clients.payments', 'PaymentMethodController')->shallow()->except(['index', 'show', 'edit']);
 Route::resource('advertisements.services', 'ServiceController')->shallow();
 Route::get('/advertisements/all', 'AdvertisementController@index')->name('advertisements.all');
 Route::resource('professionals.advertisements', 'AdvertisementController')->shallow()->except(['index']);
-Route::post('/advertisements/{advertisement}/restore', 'AdvertisementController@restore')->name('advertisements.restore');
-Route::resource('clients', 'ClientController');
-Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
 Route::get('/sobre', 'HomeController@sobre')->name('sobre');
 Route::get('/contato', 'HomeController@contato')->name('contato');
-Route::resource('professionals', 'ProfessionalController');
-Route::get('/professionals/{professional}/dashboard', 'ProfessionalDashboardController@index')->name('professionals.dashboard');
-Route::resource('people.phones', 'PhoneController')->shallow()->except(['index', 'show']);
-Route::resource('people.addresses', 'AddressController')->shallow()->except(['index', 'show']);
+Route::resource('professionals', 'ProfessionalController')->shallow()->except(['index', 'show', 'edit']);
 Route::get('/category/{category}/advertisements', 'CategoryController@getAdvertisements')->name('category.advertisements');
+Route::get('/login/professionals', 'Auth\LoginProfessionalsController@login')->name('login.professional');
+Route::post('/login/professionals', 'Auth\LoginProfessionalsController@authenticate')->name('login.professional.post');
+
+Route::middleware('auth:professional')->group(function () {
+    Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
+    Route::resource('professionals.advertisements', 'AdvertisementController')->shallow()->except(['index', 'show']);
+    Route::post('/advertisements/{advertisement}/restore', 'AdvertisementController@restore')->name('advertisements.restore');
+    Route::get('/professionals/{professional}/dashboard', 'ProfessionalDashboardController@index')->name('professionals.dashboard');
+    Route::resource('professionals', 'ProfessionalController')->shallow()->except(['create']);
+    Route::resource('people.phones', 'PhoneController')->shallow()->except(['index', 'show']);
+    Route::resource('people.addresses', 'AddressController')->shallow()->except(['index', 'show']);
+});
+Route::middleware('auth')->group(function () {
+    Route::resource('clients', 'ClientController');
+    Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
+    Route::resource('clients.payments', 'PaymentMethodController');
+    Route::resource('people.phones', 'PhoneController')->shallow()->except(['index', 'show']);
+    Route::resource('people.addresses', 'AddressController')->shallow()->except(['index', 'show']);
+});
+
 

@@ -5,7 +5,7 @@
             @csrf
             <div class='form-row container'>
                 <div class='col-xs-12 form-group required'>
-                    <label class='control-label' for="hodler">Nome no Cartão</label>
+                    <label class='control-label' for="holder">Nome no Cartão</label>
                     <input class='form-control  @error('holder') is-invalid @enderror' id="holder" name="holder"
                            size="38" type='text' required value="{{ old('holder') }}">
                 </div>
@@ -21,6 +21,11 @@
                     <input name="number" required value="{{ old('number') }}" id="cc_card" autocomplete='off'
                            class='form-control card-number @error('number') is-invalid @enderror' size='38'
                            type='text'>
+                    @error('number')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
             <div class='form-row container'>
@@ -30,7 +35,8 @@
                 </div>
                 <div class='col-xs-8 form-group expiration required'>
                     <label class='control-label'>Data de Validade</label>
-                    <input class='form-control card-expiry-year col-12 @error('valid_until') is-invalid @enderror' name="valid_until" type='date'>
+                    <input class='form-control card-expiry-year col-12 @error('valid_until') is-invalid @enderror'
+                           name="valid_until" type='date'>
                     @error('valid_until')
                     <div class="invalid-feedback">
                         {{ $message }}

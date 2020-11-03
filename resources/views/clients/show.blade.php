@@ -147,7 +147,7 @@
                 @forelse($client->paymentMethods as $paymentMethod)
                     <tr>
                         <td>{{ $paymentMethod->holder }}</td>
-                        <td>{{ $paymentMethod->number }}</td>
+                        <td>{{ $paymentMethod->number_formatted }}</td>
                         <td>{{ $paymentMethod->valid_until }}</td>
                         <td>
                             <form
