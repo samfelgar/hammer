@@ -25,10 +25,17 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('favicon.png') }}" alt="{{ config('app.name', 'Laravel') }}" height="30">
-                <span>{{ config('app.name', 'Laravel') }}</span>
-            </a>
+            @guest('professional')
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{ asset('favicon.png') }}" alt="{{ config('app.name', 'Laravel') }}" height="30">
+                    <span>{{ config('app.name', 'Laravel') }}</span>
+                </a>
+            @else
+                <a class="navbar-brand" href="{{ route('professionals.dashboard', [Auth::user()]) }}">
+                    <img src="{{ asset('favicon.png') }}" alt="{{ config('app.name', 'Laravel') }}" height="30">
+                    <span>{{ config('app.name', 'Laravel') }}</span>
+                </a>
+            @endguest
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
@@ -72,7 +79,7 @@
                                 </form>
                             </div>
                         </li>
-                    @endguest
+                    @endauth
                 </ul>
             </div>
         </div>
@@ -80,16 +87,18 @@
 
     <main class="py-4">
         <div class="container">
+
             <div class="row">
                 @section('sidebar')
                     <nav class="col-md-2">
                         <p class="font-weight-bold">Categorias</p>
                         <ul class="nav flex-column">
                             @foreach(\App\Category::all() as $category)
-                            <li class="nav-item">
-                                <a href="{{route('category.advertisements', [$category])}}" class="nav-link">{{ $category->nome }}</a>
-                            </li>
-                           @endforeach
+                                <li class="nav-item">
+                                    <a href="{{route('category.advertisements', [$category])}}"
+                                       class="nav-link">{{ $category->nome }}</a>
+                                </li>
+                            @endforeach
                             <li class="nav-item">
                                 <a href="{{route('advertisements.all')}}" class="nav-link">Todos</a>
                             </li>
@@ -103,6 +112,7 @@
             </div>
         </div>
     </main>
+    <footer class="page-footer font-small blue pt-4">
 </div>
 </body>
 </html>

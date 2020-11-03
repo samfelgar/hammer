@@ -42,7 +42,7 @@ class HomeController extends Controller
 
     public function meusDados()
     {
-        switch (Auth::user()->tipo){
+        switch (Auth::user()->tipo) {
             case 0:
                 $client = Client::find(Auth::user()->id);
                 return redirect()->route('clients.show', $client);
