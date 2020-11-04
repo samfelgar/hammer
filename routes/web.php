@@ -20,6 +20,7 @@ Route::get('/clients/dashboard', 'ClientController@dashboard')->name('clients.da
 Route::resource('clients.payments', 'PaymentMethodController')->shallow()->except(['index', 'show', 'edit']);
 Route::resource('advertisements.services', 'ServiceController')->shallow();
 Route::get('/advertisements/all', 'AdvertisementController@index')->name('advertisements.all');
+Route::post('/advertisements/results', 'AdvertisementController@searchByTitle')->name('advertisements.search');
 Route::resource('professionals.advertisements', 'AdvertisementController')->shallow()->except(['index']);
 Route::get('/sobre', 'HomeController@sobre')->name('sobre');
 Route::get('/contato', 'HomeController@contato')->name('contato');

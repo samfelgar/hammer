@@ -19,10 +19,18 @@ class AdvertisementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Advertisement $advertisement)
+    public function index()
     {
-        return view('advertisements.all', [
+        return response()->view('advertisements.all', [
             'advertisements' => Advertisement::all(),
+        ]);
+    }
+
+    public function searchByTitle(Request $request)
+    {
+        return response()->view('advertisements.all', [
+            'advertisements' => Advertisement::where('titulo', 'like', "%{$request->search}%")->get(),
+            'search' => $request->search,
         ]);
     }
 

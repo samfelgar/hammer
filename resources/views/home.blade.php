@@ -36,6 +36,15 @@
             </article>
         </div>
     </div>
+    <div class="row mt-5">
+        <div class="col-sm">
+            <form action="{{ route('advertisements.search') }}" method="post">
+                @csrf
+                <label for="search" class="h4">Procure o serviço que você deseja</label>
+                <input class="form-control" id="search" name="search" placeholder="Digite o termo desejado e tecle enter" type="text">
+            </form>
+        </div>
+    </div>
     <div>
         <h3 class="mt-3">Mais recentes</h3>
         <div class="row">

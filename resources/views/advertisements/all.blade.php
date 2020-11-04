@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')
-    <h1 class="">Todos os Anuncios</h1>
+    @if(isset($search))
+        <h1>Resultados para: "{{ $search }}"</h1>
+    @else
+        <h1>Todos os anúncios</h1>
+    @endif
     <div>
         <div class="row">
             @foreach($advertisements as $item)
