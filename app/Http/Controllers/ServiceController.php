@@ -72,6 +72,14 @@ class ServiceController extends Controller
         ]);
     }
 
+    public function accept(Service $service)
+    {
+        $service->status = Status::aguardandoPagamento();
+        $service->save();
+        return redirect()->route('professionals.dashboard', [$service->professional])
+            ->with('success', 'Serviço aceito.');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

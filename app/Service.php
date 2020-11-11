@@ -24,7 +24,7 @@ class Service extends Model
 
     public function professional()
     {
-        return $this->hasOneThrough('App\Professional', 'App\Advertisement', 'person_id');
+        return $this->hasOneThrough('App\Professional', 'App\Advertisement', 'person_id', 'id', 'advertisement_id');
     }
 
     public function client()

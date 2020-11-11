@@ -26,7 +26,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             @auth('professional')
-                <a class="navbar-brand" href="{{ route('professionals.dashboard', [Auth::user()]) }}">
+                <a class="navbar-brand" href="{{ route('professionals.dashboard', [Auth::guard('professional')->user()]) }}">
                     <img src="{{ asset('favicon.png') }}" alt="{{ config('app.name', 'Laravel') }}" height="30">
                     <span>{{ config('app.name', 'Laravel') }}</span>
                 </a>

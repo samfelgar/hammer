@@ -33,6 +33,7 @@ Route::middleware('auth:professional')->group(function () {
     Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
     Route::resource('professionals.advertisements', 'AdvertisementController')->shallow()->except(['index', 'show']);
     Route::post('/advertisements/{advertisement}/restore', 'AdvertisementController@restore')->name('advertisements.restore');
+    Route::get('/services/{service}/accept', 'ServiceController@accept')->name('services.accept');
     Route::resource('advertisements.services', 'ServiceController')->shallow();
     Route::get('/professionals/{professional}/dashboard', 'ProfessionalDashboardController@index')->name('professionals.dashboard');
     Route::resource('professionals', 'ProfessionalController')->shallow()->except(['create']);

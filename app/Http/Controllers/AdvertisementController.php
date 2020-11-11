@@ -11,6 +11,7 @@ use App\Phone;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AdvertisementController extends Controller
 {
@@ -65,7 +66,7 @@ class AdvertisementController extends Controller
         $professional->advertisements()->save($advertisement);
         if ($request->has('photo')) {
             $photo = new Photo();
-            $photo->path = $request->photo->store('advertisements');
+            $photo->path = $request->photo->store('advertisements', 'public');
             $photo->mime = $request->photo->getMimeType();
             $photo->descricao = $advertisement->titulo;
             $advertisement->photos()->save($photo);
@@ -73,9 +74,6 @@ class AdvertisementController extends Controller
         return redirect()->route('professionals.dashboard', [
             $professional
         ]);
-
-
-
     }
 
     /**
@@ -86,10 +84,10 @@ class AdvertisementController extends Controller
      */
     public function show(Advertisement $advertisement)
     {
-        $person = Professional::find($advertisement->person_id);
         return view('advertisements.ad', [
-            'advertisements' => $advertisement,
-            'professional' => $person,
+            'advertisement' => $advertisement,
+            'professional' => $advertisement->professional,
+            'photo' => Storage::disk('public')->url($advertisement->photos()->first()->path)
         ]);
     }
 
