@@ -29,7 +29,7 @@
                             <a href="{{ route('services.accept', [$service]) }}" class="btn btn-sm btn-success">Aceitar
                                 serviço</a>
                         @endif
-                        <a href="{{ route('services.show', [$service]) }}" class="btn btn-sm btn-primary">Detalhes </a>
+                        <a href="{{ route('professionals.services.show', [$service]) }}" class="btn btn-sm btn-primary">Detalhes </a>
                     </td>
                 </tr>
             @empty
