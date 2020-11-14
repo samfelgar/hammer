@@ -19,6 +19,70 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <style>
+        .site-footer {
+            background-color: #fff;
+            padding: 35px 0 20px;
+            font-size: 15px;
+            line-height: 24px;
+            color: #737373;
+        }
+
+        .site-footer h6 {
+            color: #1b4b72;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px
+        }
+
+        .site-footer a {
+            color: #1b4b72;
+        }
+
+        .site-footer a:hover {
+            color: #1b1e21;
+            text-decoration: none;
+        }
+
+        .footer-links {
+            padding-left: 0;
+            list-style: none
+        }
+
+        .footer-links li {
+            display: block
+        }
+
+        .footer-links a {
+            color: #1d68a7;
+        }
+
+        .footer-links a:active, .footer-links a:focus, .footer-links a:hover {
+            color: #1b1e21;
+            text-decoration: none;
+        }
+
+        .footer-links.inline li {
+            display: inline-block
+        }
+
+        @media (max-width: 991px) {
+            .site-footer [class^=col-] {
+                margin-bottom: 30px
+            }
+        }
+
+        @media (max-width: 767px) {
+            .site-footer {
+                padding-bottom: 0
+            }
+
+            .site-footer .copyright-text {
+                text-align: center
+            }
+        }
+    </style>
+
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 </head>
 <body>
@@ -26,7 +90,8 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             @auth('professional')
-                <a class="navbar-brand" href="{{ route('professionals.dashboard', [Auth::guard('professional')->user()]) }}">
+                <a class="navbar-brand"
+                   href="{{ route('professionals.dashboard', [Auth::guard('professional')->user()]) }}">
                     <img src="{{ asset('favicon.png') }}" alt="{{ config('app.name', 'Laravel') }}" height="30">
                     <span>{{ config('app.name', 'Laravel') }}</span>
                 </a>
@@ -112,7 +177,32 @@
             </div>
         </div>
     </main>
-    <footer class="page-footer font-small blue pt-4">
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h6>Acessos</h6>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="{{ route('login') }}">Acesso de usuários</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('login.professional') }}">Acesso de profissionais</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="copyright-text">Desenvolvido com <span class="text-danger h5">&#10084</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 </div>
 </body>
 </html>
