@@ -2,8 +2,10 @@
 @section('sidebar')
 @endsection
 @section('content')
-    <h3>Olá, {{ $professional->nome }}!</h3>
-    <div class="mt-4">
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    <div>
         <h4>Meus serviços</h4>
         <table class="table table-hover">
             <thead>
@@ -23,7 +25,11 @@
                     <td>{{ $service->status->label }}</td>
                     <td>{{ $service->created_at->format('d/m/Y') }}</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-primary">Ver andamento</a>
+                        @if($service->status->equals(\App\Enums\Status::aceitacao()))
+                            <a href="{{ route('services.accept', [$service]) }}" class="btn btn-sm btn-success">Aceitar
+                                serviço</a>
+                        @endif
+                        <a href="{{ route('professionals.services.show', [$service]) }}" class="btn btn-sm btn-primary">Detalhes </a>
                     </td>
                 </tr>
             @empty
@@ -61,20 +67,22 @@
                     <td>{{ $advertisement->category->nome }}</td>
                     <td>
                         @if(isset($advertisement->deleted_at))
-                            <form action="{{route('advertisements.restore', $advertisement)}}" method="post" class="d-inline">
+                            <form action="{{route('advertisements.restore', $advertisement)}}" method="post"
+                                  class="d-inline">
                                 @csrf
                                 <button class="btn btn-danger btn-sm col-4" type="submit">Restaurar Anuncio</button>
                             </form>
                         @else
-                            <form action="{{route('advertisements.destroy', $advertisement)}}" method="post" class="d-inline">
+                            <form action="{{route('advertisements.destroy', $advertisement)}}" method="post"
+                                  class="d-inline">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-danger btn-sm col-4" type="submit">Pausar Anuncio</button>
                             </form>
                         @endif
 
-                            <a href="{{route('advertisements.edit', $advertisement)}}"
-                               class="btn btn-primary btn-sm col-4">Editar Anuncio</a>
+                        <a href="{{route('advertisements.edit', $advertisement)}}"
+                           class="btn btn-primary btn-sm col-4">Editar Anuncio</a>
                     </td>
                 </tr>
             @empty

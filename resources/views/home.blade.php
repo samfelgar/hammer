@@ -41,7 +41,8 @@
             <form action="{{ route('advertisements.search') }}" method="post">
                 @csrf
                 <label for="search" class="h4">Procure o serviço que você deseja</label>
-                <input class="form-control" id="search" name="search" placeholder="Digite o termo desejado e tecle enter" type="text">
+                <input class="form-control" id="search" name="search"
+                       placeholder="Digite o termo desejado e tecle enter" type="text">
             </form>
         </div>
     </div>
@@ -49,11 +50,18 @@
         <h3 class="mt-3">Mais recentes</h3>
         <div class="row">
             @foreach($advertisements as $item)
+                @php
+                    $photo = $item->photos()->first();
+                    $src = 'https://via.placeholder.com/600';
+                    if($photo) {
+                        $src = Storage::disk('public')->url($photo->path);
+                    }
+                @endphp
                 <div class="col-sm-3 mt-3">
                     <div class="card">
                         <img class="card-img-top"
-                             src="https://image.freepik.com/vetores-gratis/imagens-animadas-abstratas-neon-lines_23-2148344065.jpg"
-                             alt="Card image cap">
+                             src="{{ $src }}"
+                             alt="Sem foto">
                         <div class="card-body">
                             <h5 class="card-title">{{$item->titulo}}</h5>
                             <p class="card-text">

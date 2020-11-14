@@ -25,17 +25,17 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            @guest('professional')
-                <a class="navbar-brand" href="{{ url('/') }}">
+            @auth('professional')
+                <a class="navbar-brand" href="{{ route('professionals.dashboard', [Auth::guard('professional')->user()]) }}">
                     <img src="{{ asset('favicon.png') }}" alt="{{ config('app.name', 'Laravel') }}" height="30">
                     <span>{{ config('app.name', 'Laravel') }}</span>
                 </a>
             @else
-                <a class="navbar-brand" href="{{ route('professionals.dashboard', [Auth::user()]) }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('favicon.png') }}" alt="{{ config('app.name', 'Laravel') }}" height="30">
                     <span>{{ config('app.name', 'Laravel') }}</span>
                 </a>
-            @endguest
+            @endauth
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
