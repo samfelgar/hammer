@@ -40,9 +40,9 @@ class ProfessionalPolicy
      * @param  \App\Client  $client
      * @return mixed
      */
-    public function create(Client $client)
+    public function create(Professional $professional)
     {
-        //
+        return true;
     }
 
     /**
