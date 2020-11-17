@@ -28,6 +28,8 @@ Route::resource('professionals', 'ProfessionalController')->shallow()->except(['
 Route::get('/category/{category}/advertisements', 'CategoryController@getAdvertisements')->name('category.advertisements');
 Route::get('/login/professionals', 'Auth\LoginProfessionalsController@login')->name('login.professional');
 Route::post('/login/professionals', 'Auth\LoginProfessionalsController@authenticate')->name('login.professional.post');
+Route::get('/login/users', 'Auth\LoginUserController@login')->name('login.user');
+Route::post('/login/users', 'Auth\LoginUserController@authenticate')->name('login.user.post');
 
 Route::middleware('auth:professional')->group(function () {
     Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
@@ -46,4 +48,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('people.addresses', 'AddressController')->shallow()->except(['index', 'show']);
 });
 
+Route::middleware('auth:user')->group(function (){
+    Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
+    Route::get('/admin/{user}/dashboard', 'AdminDashboardController@index')->name('admin.dashboard');
+});
 
