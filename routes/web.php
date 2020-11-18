@@ -24,7 +24,7 @@ Route::post('/advertisements/results', 'AdvertisementController@searchByTitle')-
 Route::resource('professionals.advertisements', 'AdvertisementController')->shallow()->except(['index']);
 Route::get('/sobre', 'HomeController@sobre')->name('sobre');
 Route::get('/contato', 'HomeController@contato')->name('contato');
-Route::resource('professionals', 'ProfessionalController')->shallow()->except(['index', 'show', 'edit']);
+Route::resource('professionals', 'ProfessionalController')->only(['create', 'store']);
 Route::get('/category/{category}/advertisements', 'CategoryController@getAdvertisements')->name('category.advertisements');
 Route::get('/login/professionals', 'Auth\LoginProfessionalsController@login')->name('login.professional');
 Route::post('/login/professionals', 'Auth\LoginProfessionalsController@authenticate')->name('login.professional.post');
@@ -34,9 +34,11 @@ Route::middleware('auth:professional')->group(function () {
     Route::resource('professionals.advertisements', 'AdvertisementController')->shallow()->except(['index', 'show']);
     Route::post('/advertisements/{advertisement}/restore', 'AdvertisementController@restore')->name('advertisements.restore');
     Route::get('/services/{service}/accept', 'ServiceController@accept')->name('services.accept');
+    Route::get('/services/{service}/start', 'ServiceController@start')->name('services.start');
+    Route::get('/services/{service}/finish', 'ServiceController@finish')->name('services.finish');
     Route::get('/professionals/services/{service}', 'ServiceController@show')->name('professionals.services.show');
     Route::get('/professionals/{professional}/dashboard', 'ProfessionalDashboardController@index')->name('professionals.dashboard');
-    Route::resource('professionals', 'ProfessionalController')->shallow()->except(['create']);
+    Route::resource('professionals', 'ProfessionalController')->shallow()->except(['create', 'store']);
     Route::resource('people.phones', 'PhoneController')->shallow()->except(['index', 'show']);
     Route::resource('people.addresses', 'AddressController')->shallow()->except(['index', 'show']);
 });

@@ -80,6 +80,22 @@ class ServiceController extends Controller
             ->with('success', 'Serviço aceito.');
     }
 
+    public function start(Service $service)
+    {
+        $service->status = Status::emAndamento();
+        $service->save();
+        return redirect()->route('professionals.dashboard', [$service->professional])
+            ->with('success', 'Serviço em andamento.');
+    }
+
+    public function finish(Service $service)
+    {
+        $service->status = Status::concluido();
+        $service->save();
+        return redirect()->route('professionals.dashboard', [$service->professional])
+            ->with('success', 'Serviço concluído.');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

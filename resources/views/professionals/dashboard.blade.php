@@ -29,6 +29,14 @@
                             <a href="{{ route('services.accept', [$service]) }}" class="btn btn-sm btn-success">Aceitar
                                 serviço</a>
                         @endif
+                        @if($service->status->equals(\App\Enums\Status::pagamentoEfetuado()))
+                            <a href="{{ route('services.start', [$service]) }}" class="btn btn-sm btn-success">Iniciar
+                                serviço</a>
+                        @endif
+                        @if($service->status->equals(\App\Enums\Status::emAndamento()))
+                            <a href="{{ route('services.finish', [$service]) }}" class="btn btn-sm btn-success">Informar
+                                conclusão</a>
+                        @endif
                         <a href="{{ route('professionals.services.show', [$service]) }}" class="btn btn-sm btn-primary">Detalhes </a>
                     </td>
                 </tr>

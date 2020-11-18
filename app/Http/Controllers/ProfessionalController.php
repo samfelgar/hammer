@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProfessional;
 use App\Professional;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ProfessionalController extends Controller
@@ -39,10 +40,12 @@ class ProfessionalController extends Controller
      */
     public function store(StoreProfessional $request)
     {
+        $this->authorize('create', Professional::class);
         $professional = new Professional();
         $professional->fill($request->validated());
         $professional->senha = Hash::make($professional->senha);
         $professional->save();
+        Auth::guard('professional')->login($professional);
         return redirect()->route('professionals.show', [$professional])->with('success', 'Dados salvos com sucesso!');
     }
 
