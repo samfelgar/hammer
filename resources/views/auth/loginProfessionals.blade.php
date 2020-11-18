@@ -51,11 +51,8 @@
             </form>
         </div>
         <div class="col-md">
-            <h3>Acesse pelas redes sociais</h3>
-            <button class="btn btn-lg btn-primary">Facebook</button>
-            <button class="btn btn-lg btn-outline-secondary">Google</button>
-            <h3 class="mt-2">Ou registre-se</h3>
-            <a href="{{route('professionals.create')}}" class="btn btn-lg btn-primary">Registrar</a>
+            <h3>Ou registre-se</h3>
+            <a href="{{route('professionals.create')}}" class="btn btn-primary">Registrar</a>
         </div>
     </div>
 @endsection

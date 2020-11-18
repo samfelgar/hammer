@@ -194,13 +194,6 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <p class="copyright-text">Desenvolvido com <span class="text-danger h5">&#10084</span></p>
-                </div>
-            </div>
-        </div>
     </footer>
 
 </div>
