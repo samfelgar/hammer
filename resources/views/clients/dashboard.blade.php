@@ -3,6 +3,9 @@
 @endsection
 @section('content')
     <h3>Meus serviços</h3>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
     <table class="table">
         <thead>
         <tr>
@@ -22,7 +25,17 @@
                 <td>{{ $service->status->label }}</td>
                 <td>{{ $service->data->format('d/m/Y') }}</td>
                 <td>{{ $service->os }}</td>
-                <td><a href="{{ route('services.show', [$service]) }}" class="btn btn-primary btn-sm">Detalhes</a></td>
+                <td>
+                    @if($service->status->equals(\App\Enums\Status::emAndamento()))
+                        <form action="{{ route('clients.services.finish', [$service]) }}" method="post"
+                              class="d-inline">
+                            @csrf
+                            @method('put')
+                            <button type="submit" class="btn btn-sm btn-success">Informar conclusão</button>
+                        </form>
+                    @endif
+                    <a href="{{ route('services.show', [$service]) }}" class="btn btn-primary btn-sm">Detalhes</a>
+                </td>
             </tr>
         @endforeach
         </tbody>

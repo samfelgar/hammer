@@ -11,6 +11,7 @@ use Spatie\Enum\Enum;
  * @method static self aguardandoPagamento()
  * @method static self pagamentoEfetuado()
  * @method static self emAndamento()
+ * @method static self aguardandoConclusao()
  * @method static self concluido()
  * @method static self liberarPagamento()
  * @method static self cancelado()
@@ -25,8 +26,9 @@ class Status extends Enum
             'aguardandoPagamento' => 1,
             'pagamentoEfetuado' => 2,
             'emAndamento' => 3,
-            'concluido' => 4,
-            'liberarPagamento' => 5,
+            'aguardandoConclusao' => 4,
+            'concluido' => 5,
+            'liberarPagamento' => 6,
             'cancelado' => 400,
         ];
     }
@@ -36,8 +38,9 @@ class Status extends Enum
         return [
             'aceitacao' => 'Aceitação',
             'aguardandoPagamento' => 'Aguardando pagamento',
-            'pagamentoEfetuado' => 'Pagamento Efetuado',
+            'pagamentoEfetuado' => 'Pagamento efetuado',
             'emAndamento' => 'Em andamento',
+            'aguardandoConclusao' => 'Aguardando conclusão',
             'concluido' => 'Concluído',
             'liberarPagamento' => 'Liberar pagamento',
             'cancelado' => 'Cancelado',

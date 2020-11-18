@@ -11,6 +11,7 @@ class Service extends Model
         'data',
         'os',
         'status',
+        'client_conclusion'
     ];
 
     protected $dates = [

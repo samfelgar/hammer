@@ -33,7 +33,7 @@
                             <a href="{{ route('services.start', [$service]) }}" class="btn btn-sm btn-success">Iniciar
                                 serviço</a>
                         @endif
-                        @if($service->status->equals(\App\Enums\Status::emAndamento()))
+                        @if($service->status->equals(\App\Enums\Status::aguardandoConclusao()))
                             <a href="{{ route('services.finish', [$service]) }}" class="btn btn-sm btn-success">Informar
                                 conclusão</a>
                         @endif

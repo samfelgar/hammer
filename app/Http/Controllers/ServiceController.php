@@ -10,6 +10,7 @@ use App\PaymentMethod;
 use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ServiceController extends Controller
 {
@@ -90,10 +91,20 @@ class ServiceController extends Controller
 
     public function finish(Service $service)
     {
-        $service->status = Status::concluido();
+        $service->status = Status::liberarPagamento();
         $service->save();
         return redirect()->route('professionals.dashboard', [$service->professional])
             ->with('success', 'Serviço concluído.');
+    }
+
+    public function clientFinish(Service $service)
+    {
+        if (!$service->status->equals(Status::emAndamento())) {
+            throw new BadRequestHttpException('A situação do serviço não permite sua conclusão.');
+        }
+        $service->status = Status::aguardandoConclusao();
+        $service->save();
+        return redirect()->route('clients.dashboard')->with('success', 'Operação realizada com sucesso.');
     }
 
     /**

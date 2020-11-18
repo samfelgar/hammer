@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +43,7 @@ Route::middleware('auth:professional')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::put('/services/{service}/finish', 'ServiceController@clientFinish')->name('clients.services.finish');
     Route::resource('advertisements.services', 'ServiceController')->shallow();
     Route::resource('clients', 'ClientController');
     Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
