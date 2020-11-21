@@ -150,4 +150,13 @@ class ServiceController extends Controller
             throw $exception;
         }
     }
+
+    public function admin(Service $service)
+    {
+        return view('admin.service', [
+            'service' => $service,
+            'cliente' => $service->paymentMethod->client,
+            'professional' => $service->advertisement->professional
+        ]);
+    }
 }

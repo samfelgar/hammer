@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-
-use App\Exceptions\ProfessionalNotFoundException;
-use App\Professional;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
-class LoginProfessionalsController extends Controller
+class LoginUserController extends Controller
 {
     use AuthenticatesUsers;
 
@@ -37,18 +31,17 @@ class LoginProfessionalsController extends Controller
 
     public function login()
     {
-        return view('auth.loginProfessionals');
+        return view('auth.loginUser');
     }
 
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        if (Auth::guard('professional')->attempt($credentials)) {
-
-            return redirect()->intended(route('professionals.dashboard', [Auth::guard('professional')->user()]));
+        if (Auth::guard('user')->attempt($credentials) && Auth::guard('user')->user()->tipo == 2) {
+            return redirect()->intended(route('admin.dashboard', [Auth::guard('user')->user()]));
         }
         return back()
             ->withInput()
-            ->withErrors(['email' => 'Não foi possivel encontrar o profissional']);
+            ->withErrors(['email' => 'Não foi possivel encontrar o usuario administrador']);
     }
 }
