@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\HasPhoneInterface;
 use App\Http\Requests\StoreProfessional;
 use App\Professional;
+use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Hash;
@@ -111,5 +112,10 @@ class ProfessionalController extends Controller
     public function destroy(Professional $professional)
     {
         //
+    }
+
+    public function admin(Professional $professional)
+    {
+        return view('admin.professional', ['professional' => $professional]);
     }
 }

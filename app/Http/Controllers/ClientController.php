@@ -114,4 +114,9 @@ class ClientController extends Controller
     {
         //
     }
+
+    public function admin(Client $client)
+    {
+        return view('admin.cliente', ['cliente' => $client]);
+    }
 }

@@ -42,6 +42,7 @@
                         </div>
                     </div>
                     <button class="btn btn-block btn-primary" type="submit">{{ __('Login') }}</button>
+                    <a class="btn btn-block btn-secondary" href="{{url()->previous()}}">Voltar</a>
                     @if (Route::has('password.request'))
                         <a class="btn btn-link" href="{{ route('password.request') }}">
                             {{ __('Forgot Your Password?') }}

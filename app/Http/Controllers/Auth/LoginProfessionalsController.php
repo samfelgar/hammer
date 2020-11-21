@@ -44,6 +44,7 @@ class LoginProfessionalsController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (Auth::guard('professional')->attempt($credentials)) {
+
             return redirect()->intended(route('professionals.dashboard', [Auth::guard('professional')->user()]));
         }
         return back()

@@ -51,5 +51,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth:user')->group(function (){
     Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
     Route::get('/admin/{user}/dashboard', 'AdminDashboardController@index')->name('admin.dashboard');
+    Route::get('/services/{service}/admin', 'ServiceController@admin')->name('services.admin');
+    Route::get('/clients/{client}/admin', 'ClientController@admin')->name('clients.admin');
+    Route::get('/professionals/{professional}/admin', 'ProfessionalController@admin')->name('professionals.admin');
 });
 

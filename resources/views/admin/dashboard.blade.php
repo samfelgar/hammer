@@ -23,7 +23,7 @@
                     <td>{{ $service->status->label }}</td>
                     <td>{{ $service->created_at->format('d/m/Y') }}</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-primary">Ver andamento</a>
+                        <a href="{{route('services.admin', $service)}}" class="btn btn-sm btn-primary">Visualizar</a>
                     </td>
                 </tr>
             @empty
@@ -34,55 +34,4 @@
             </tbody>
         </table>
     </div>
-{{--    <div class="mt-4">--}}
-{{--        <div class="d-flex justify-content-between mb-2">--}}
-{{--            <h4>Meus anúncios</h4>--}}
-{{--            <div>--}}
-{{--                <a href="{{ route('professionals.advertisements.create', [$professional]) }}"--}}
-{{--                   class="btn btn-primary btn-sm">Novo anúncio</a>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <table class="table table-hover">--}}
-{{--            <thead>--}}
-{{--            <tr>--}}
-{{--                <th>Título</th>--}}
-{{--                <th>Data</th>--}}
-{{--                <th>Preço</th>--}}
-{{--                <th>Categoria</th>--}}
-{{--                <th>Opções</th>--}}
-{{--            </tr>--}}
-{{--            </thead>--}}
-{{--            <tbody>--}}
-{{--            @forelse($professional->advertisements()->withTrashed()->get() as $advertisement)--}}
-{{--                <tr>--}}
-{{--                    <td>{{ $advertisement->titulo }}</td>--}}
-{{--                    <td>{{ $advertisement->data_formatted }}</td>--}}
-{{--                    <td>{{ $advertisement->preco_formatted }}</td>--}}
-{{--                    <td>{{ $advertisement->category->nome }}</td>--}}
-{{--                    <td>--}}
-{{--                        @if(isset($advertisement->deleted_at))--}}
-{{--                            <form action="{{route('advertisements.restore', $advertisement)}}" method="post" class="d-inline">--}}
-{{--                                @csrf--}}
-{{--                                <button class="btn btn-danger btn-sm col-4" type="submit">Restaurar Anuncio</button>--}}
-{{--                            </form>--}}
-{{--                        @else--}}
-{{--                            <form action="{{route('advertisements.destroy', $advertisement)}}" method="post" class="d-inline">--}}
-{{--                                @csrf--}}
-{{--                                @method('delete')--}}
-{{--                                <button class="btn btn-danger btn-sm col-4" type="submit">Pausar Anuncio</button>--}}
-{{--                            </form>--}}
-{{--                        @endif--}}
-
-{{--                        <a href="{{route('advertisements.edit', $advertisement)}}"--}}
-{{--                           class="btn btn-primary btn-sm col-4">Editar Anuncio</a>--}}
-{{--                    </td>--}}
-{{--                </tr>--}}
-{{--            @empty--}}
-{{--                <tr>--}}
-{{--                    <td colspan="5">Sem registros.</td>--}}
-{{--                </tr>--}}
-{{--            @endforelse--}}
-{{--            </tbody>--}}
-{{--        </table>--}}
-{{--    </div>--}}
 @endsection

@@ -55,8 +55,16 @@
                 <h3>Acesse pelas redes sociais</h3>
                 <button class="btn btn-lg btn-primary">Facebook</button>
                 <button class="btn btn-lg btn-outline-secondary">Google</button>
-                <h3 class="mt-2">Sou Profissional</h3>
-                <a href="{{route('login.professional')}}" class="btn btn-lg btn-dark">Profissional</a>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3 class="mt-2">Sou Profissional</h3>
+                        <a href="{{route('login.professional')}}" class="btn btn-lg btn-dark">Profissional</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <h3 class="mt-2">Administração</h3>
+                        <a href="{{route('login.user')}}" class="btn btn-lg btn-success">Administradores</a>
+                    </div>
+                </div>
             </div>
         </div>
 
