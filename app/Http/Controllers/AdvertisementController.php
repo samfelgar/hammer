@@ -29,8 +29,16 @@ class AdvertisementController extends Controller
 
     public function searchByTitle(Request $request)
     {
+        $advertisements = Advertisement::where('titulo', 'like', "%{$request->search}%")->get();
+        $categories = Category::with('advertisements')->where('nome', 'like', "%{$request->search}%")->get();
+        foreach ($categories as $category) {
+            foreach ($category->advertisements as $child) {
+                $advertisements->push($child);
+            }
+        }
+
         return response()->view('advertisements.all', [
-            'advertisements' => Advertisement::where('titulo', 'like', "%{$request->search}%")->get(),
+            'advertisements' => $advertisements->unique(),
             'search' => $request->search,
         ]);
     }
