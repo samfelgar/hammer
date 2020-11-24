@@ -98,11 +98,9 @@
 
                 </div>
                 <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Salvar</button>
-                            <a class="btn btn-secondary" href="{{url()->previous()}}">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a class="btn btn-secondary" href="{{url()->previous()}}">Cancelar</a>
                 </div>
             </form>
         </div>
-
-
 @endsection

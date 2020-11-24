@@ -5,19 +5,14 @@ namespace App\Http\Controllers;
 use App\Address;
 use App\Http\Requests\StoreAddress;
 use App\Person;
+use App\Traits\GenericPersonActions;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    use GenericPersonActions;
+
+    protected $routeSlug = 'addresses';
 
     /**
      * Show the form for creating a new resource.
@@ -25,12 +20,15 @@ class AddressController extends Controller
      * @param Request $request
      * @param Person $person
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function create(Request $request, Person $person)
     {
         $redirectTo = $request->query('redirectTo') ?? null;
+        $routeName = $this->getActionName($person, 'store');
         return response()->view('addresses.create', [
             'person' => $person,
+            'action' => $routeName,
             'redirectTo' => $redirectTo,
         ]);
     }
@@ -57,17 +55,6 @@ class AddressController extends Controller
         } catch (\Exception $e) {
             throw $e;
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

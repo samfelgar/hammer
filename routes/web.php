@@ -58,8 +58,18 @@ Route::middleware('auth')->group(function () {
     Route::resource('clients', 'ClientController');
     Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
     Route::resource('clients.payments', 'PaymentMethodController');
-    Route::resource('people.phones', 'PhoneController')->shallow()->except(['index', 'show']);
-    Route::resource('people.addresses', 'AddressController')->shallow()->except(['index', 'show']);
+    Route::resource('clients.phones', 'PhoneController')
+        ->parameters([
+            'clients' => 'person'
+        ])
+        ->shallow()
+        ->except(['index', 'show']);
+    Route::resource('clients.addresses', 'AddressController')
+        ->parameters([
+            'clients' => 'person'
+        ])
+        ->shallow()
+        ->except(['index', 'show']);
 });
 
 

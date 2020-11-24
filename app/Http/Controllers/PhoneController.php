@@ -6,19 +6,15 @@ use App\Http\Requests\StorePhone;
 use App\Person;
 use App\Phone;
 use App\Professional;
+use App\Traits\GenericPersonActions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PhoneController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    use GenericPersonActions;
+
+    protected $routeSlug = 'phones';
 
     /**
      * Show the form for creating a new resource.
@@ -26,12 +22,15 @@ class PhoneController extends Controller
      * @param Request $request
      * @param Person $person
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function create(Request $request, Person $person)
     {
         $redirectTo = $request->query('redirectTo') ?? null;
+        $routeName = $this->getActionName($person, 'store');
         return response()->view('phones.create', [
             'person' => $person,
+            'action' => $routeName,
             'redirectTo' => $redirectTo,
         ]);
     }
@@ -57,17 +56,6 @@ class PhoneController extends Controller
         } catch (\Exception $e) {
             throw $e;
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -119,7 +107,6 @@ class PhoneController extends Controller
      */
     public function destroy(Request $request, Phone $phone)
     {
-
         try {
             $redirectTo = $request->query('redirectTo');
             if (empty($redirectTo)) {

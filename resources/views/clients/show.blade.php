@@ -44,7 +44,7 @@
     <div class="form-row">
         <div class="col-sm-7">
             <h5>Telefones <a
-                    href="{{ route('people.phones.create', [$client, 'redirectTo' => route('professionals.show', [$client])]) }}"
+                    href="{{ route('clients.phones.create', [$client, 'redirectTo' => route('clients.show', [$client])]) }}"
                     class="btn btn-sm btn-primary">novo</a>
             </h5>
             <table class="table table-sm">
@@ -83,7 +83,7 @@
     <div class="form-row">
         <div class="col-sm">
             <h5>Endereços <a
-                    href="{{ route('people.addresses.create', [$client, 'redirectTo' => url()->current()]) }}"
+                    href="{{ route('clients.addresses.create', [$client, 'redirectTo' => url()->current()]) }}"
                     class="btn btn-sm btn-primary">novo</a></h5>
             <table class="table table-sm">
                 <thead>
