@@ -29,7 +29,7 @@ Route::get('/login/professionals', 'Auth\LoginProfessionalsController@login')->n
 Route::post('/login/professionals', 'Auth\LoginProfessionalsController@authenticate')->name('login.professional.post');
 
 Route::middleware('auth:professional')->group(function () {
-    Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
+    Route::get('/professionals/data/', 'HomeController@professionalData')->name('professionals.data');
     Route::resource('professionals.advertisements', 'AdvertisementController')->shallow()->except(['index', 'show']);
     Route::post('/advertisements/{advertisement}/restore', 'AdvertisementController@restore')->name('advertisements.restore');
     Route::get('/services/{service}/accept', 'ServiceController@accept')->name('services.accept');
@@ -38,8 +38,18 @@ Route::middleware('auth:professional')->group(function () {
     Route::get('/professionals/services/{service}', 'ServiceController@show')->name('professionals.services.show');
     Route::get('/professionals/{professional}/dashboard', 'ProfessionalDashboardController@index')->name('professionals.dashboard');
     Route::resource('professionals', 'ProfessionalController')->shallow()->except(['create', 'store']);
-    Route::resource('people.phones', 'PhoneController')->shallow()->except(['index', 'show']);
-    Route::resource('people.addresses', 'AddressController')->shallow()->except(['index', 'show']);
+    Route::resource('professionals.phones', 'PhoneController')
+        ->parameters([
+            'professionals' => 'person',
+        ])
+        ->shallow()
+        ->except(['index', 'show']);
+    Route::resource('professionals.addresses', 'AddressController')
+        ->parameters([
+            'professionals' => 'person',
+        ])
+        ->shallow()
+        ->except(['index', 'show']);
 });
 
 Route::middleware('auth')->group(function () {

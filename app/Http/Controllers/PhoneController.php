@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePhone;
 use App\Person;
 use App\Phone;
+use App\Professional;
 use Illuminate\Http\Request;
 
 class PhoneController extends Controller

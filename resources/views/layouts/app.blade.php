@@ -128,15 +128,17 @@
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->nome }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="{{route('meusDados')}}" class="dropdown-item">Meus Dados</a>
                                 @auth('professional')
-                                    <a href="{{route('professionals.dashboard', [Auth::user()])}}" class="dropdown-item">Dashboard</a>
+                                    <a href="{{route('professionals.data')}}" class="dropdown-item">Meus Dados</a>
+                                    <a href="{{route('professionals.dashboard', [Auth::user()])}}"
+                                       class="dropdown-item">Dashboard</a>
                                 @endauth
                                 @auth('web')
+                                    <a href="{{route('meusDados')}}" class="dropdown-item">Meus Dados</a>
                                     <a href="{{route('clients.dashboard')}}" class="dropdown-item">Dashboard</a>
                                 @endauth
                                 <a class="dropdown-item" href="{{ route('logout') }}"
