@@ -42,18 +42,16 @@ class HomeController extends Controller
 
     public function meusDados()
     {
-        switch (Auth::user()->tipo) {
-            case 0:
-                $client = Client::find(Auth::user()->id);
-                return redirect()->route('clients.show', $client);
-                break;
-
-            case 1:
-                $professional = Professional::find(Auth::user()->id);
-                return redirect()->route('professionals.show', $professional);
-                break;
-            case null:
-                return route('home');
+        if (!empty(Auth::user())) {
+            $client = Client::find(Auth::user()->id);
+            return redirect()->route('clients.show', $client);
         }
+
+        return route('home');
+    }
+
+    public function professionalData()
+    {
+        return redirect()->route('professionals.show', Auth::guard('professional')->user());
     }
 }
