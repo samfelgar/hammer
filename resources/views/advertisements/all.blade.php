@@ -7,7 +7,7 @@
     @endif
     <div>
         <div class="row">
-            @foreach($advertisements as $item)
+            @forelse($advertisements as $item)
                 @php
                     $photo = $item->photos()->first();
                     $src = 'https://via.placeholder.com/600';
@@ -27,7 +27,11 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col">
+                    <h4>Não foram encontrados resultados.</h4>
+                </div>
+            @endforelse
         </div>
     </div>
 @endsection
