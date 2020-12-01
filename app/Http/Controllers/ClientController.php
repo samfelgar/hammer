@@ -95,9 +95,10 @@ class ClientController extends Controller
             'email' => 'required',
             'rg' => 'required',
             'cpf' => 'required',
-            'nascimento' => 'required',
+            'nascimento' => ['required', 'date_format:d/m/Y'],
         ]);
         $data['password'] = Hash::make($data['password']);
+        $data['nascimento'] = \DateTime::createFromFormat('d/m/Y', $data['nascimento']);
 
         $client->fill($data)->save();
 

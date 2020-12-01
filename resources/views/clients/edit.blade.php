@@ -24,7 +24,7 @@
         <div class="form-group offset-md-2 col-sm-6">
             <div class="custom-file">
                 <input type="file" name="photo" id="photo" class="custom-file-input">
-                <label class="custom-file-label" for="photo">Ou selecione uma nova foto</label>
+                <label class="custom-file-label" for="photo">Selecione uma nova foto</label>
             </div>
         </div>
 
@@ -39,15 +39,6 @@
             <label for="email" class="col-sm-2 col-form-label">E-mail</label>
             <div class="col-sm-6">
                 <input type="email" class="form-control" value="{{ $client->email }}" name="email" id="email">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="phone" class="col-sm-2 col-form-label">Telefone</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control"
-                       value="{{ $client->phones()->first()->ddd ?? null }} {{ $client->phones()->first()->numero ?? null }}"
-                       name="phone" id="phone">
             </div>
         </div>
 
@@ -74,7 +65,7 @@
             <div class="col-md-6">
                 <input id="nascimento" type="text" oninput="mascaraNascimento(this)"
                        class="form-control @error('nascimento') is-invalid @enderror" name="nascimento"
-                       value="{{ \Carbon\Carbon::parse($client->nascimento)->format('d/m/Y') }}" required
+                       value="{{ $client->nascimento->format('d/m/Y') }}" required
                        autocomplete="nascimento" autofocus>
             </div>
         </div>
@@ -94,9 +85,8 @@
         </div>
 
         <div class="form-group">
-            <button class="btn btn-primary" type="submit">
-                {{ __('Editar') }}
-            </button>
+            <button class="btn btn-primary" type="submit">Salvar alterações</button>
+            <a href="{{ url()->previous() }}" class="btn btn-secondary">Voltar</a>
         </div>
     </form>
 
