@@ -138,7 +138,7 @@
                                        class="dropdown-item">Dashboard</a>
                                 @endauth
                                 @auth('web')
-                                    <a href="{{route('meusDados')}}" class="dropdown-item">Meus Dados</a>
+                                    <a href="{{route('clients.show', Auth::user())}}" class="dropdown-item">Meus Dados</a>
                                     <a href="{{route('clients.dashboard')}}" class="dropdown-item">Dashboard</a>
                                 @endauth
                                 <a class="dropdown-item" href="{{ route('logout') }}"

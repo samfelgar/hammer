@@ -29,7 +29,6 @@ Route::get('/login/professionals', 'Auth\LoginProfessionalsController@login')->n
 Route::post('/login/professionals', 'Auth\LoginProfessionalsController@authenticate')->name('login.professional.post');
 Route::get('/login/users', 'Auth\LoginUserController@login')->name('login.user');
 Route::post('/login/users', 'Auth\LoginUserController@authenticate')->name('login.user.post');
-
 Route::middleware('auth:professional')->group(function () {
     Route::get('/professionals/data/', 'HomeController@professionalData')->name('professionals.data');
     Route::resource('professionals.advertisements', 'AdvertisementController')->shallow()->except(['index', 'show']);
@@ -58,7 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/services/{service}/finish', 'ServiceController@clientFinish')->name('clients.services.finish');
     Route::resource('advertisements.services', 'ServiceController')->shallow();
     Route::resource('clients', 'ClientController');
-    Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
+    Route::get('/dados', 'HomeController@meusDados')->name('meusDados');
     Route::resource('clients.payments', 'PaymentMethodController');
     Route::resource('clients.phones', 'PhoneController')
         ->parameters([
