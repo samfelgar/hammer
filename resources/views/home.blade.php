@@ -15,7 +15,7 @@
                         @foreach($featured as $item)
                             <div class="carousel-item @if($loop->first) active @endif">
                                 <img
-                                    src="https://image.freepik.com/vetores-gratis/imagens-animadas-abstratas-neon-lines_23-2148344065.jpg"
+                                    src="{{ \Illuminate\Support\Facades\Storage::url($item->photos()->first()->path) }}"
                                     class="d-block w-100">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>{{$item->titulo}}</h5>
