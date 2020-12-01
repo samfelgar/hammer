@@ -14,8 +14,15 @@
                     <div class="carousel-inner rounded">
                         @foreach($featured as $item)
                             <div class="carousel-item @if($loop->first) active @endif">
+                                @php
+                                    $photo = $item->photos()->first();
+                                    $src = 'https://via.placeholder.com/600';
+                                    if($photo) {
+                                        $src = Storage::disk('public')->url($photo->path);
+                                    }
+                                @endphp
                                 <img
-                                    src="{{ \Illuminate\Support\Facades\Storage::url($item->photos()->first()->path) }}"
+                                    src="{{ $src }}"
                                     class="d-block w-100">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>{{$item->titulo}}</h5>
