@@ -42,8 +42,10 @@ class ProfessionalController extends Controller
     public function store(StoreProfessional $request)
     {
         $this->authorize('create', Professional::class);
+        $data = $request->validated();
+        $data['nascimento'] = \DateTime::createFromFormat('d/m/Y', $data['nascimento']);
         $professional = new Professional();
-        $professional->fill($request->validated());
+        $professional->fill($data);
         $professional->senha = Hash::make($professional->senha);
         $professional->save();
         Auth::guard('professional')->login($professional);
