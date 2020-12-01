@@ -144,11 +144,13 @@ class ServiceController extends Controller
                 throw new ServiceCancelingException();
             }
             $service->delete();
+            return redirect()->route('clients.dashboard')->with('success', 'Serviço cancelado.');
         } catch (ServiceCancelingException $exception) {
             throw $exception;
         } catch (\Exception $exception) {
             throw $exception;
         }
+
     }
 
     public function admin(Service $service)

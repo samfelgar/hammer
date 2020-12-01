@@ -53,9 +53,6 @@
         </div>
         <div class="col-md">
             <div>
-                <h3>Acesse pelas redes sociais</h3>
-                <button class="btn btn-lg btn-primary">Facebook</button>
-                <button class="btn btn-lg btn-outline-secondary">Google</button>
                 <div class="row">
                     <div class="col-sm-6">
                         <h3 class="mt-2">Sou Profissional</h3>
