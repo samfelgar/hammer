@@ -65,12 +65,15 @@ class PhoneController extends Controller
      * @param Phone $phone
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Phone $phone)
+    public function edit(Request $request, Person $person, Phone $phone)
     {
         $redirect = $request->query('redirectTo');
+        $routeName = $this->getActionName($person, 'update');
         return response()->view('phones.edit', [
+            'person' => $person,
             'phone' => $phone,
             'redirectTo' => $redirect,
+            'action' => $routeName
         ]);
     }
 
@@ -82,7 +85,7 @@ class PhoneController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
      * @throws \Exception
      */
-    public function update(StorePhone $request, Phone $phone)
+    public function update(StorePhone $request, Person $person, Phone $phone)
     {
         try {
             $redirectTo = $request->query('redirectTo') ?? null;
@@ -105,7 +108,7 @@ class PhoneController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function destroy(Request $request, Phone $phone)
+    public function destroy(Request $request, Person $person, Phone $phone)
     {
         try {
             $redirectTo = $request->query('redirectTo');

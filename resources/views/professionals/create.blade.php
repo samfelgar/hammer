@@ -58,26 +58,26 @@
                 </div>
                 @enderror
             </div>
-            <div class="col-sm-3 form-group">
-                <label for="telefone">Telefone</label>
-                <input type="text" class="form-control @error('telefone') is-invalid @enderror" name="telefone"
-                       id="telefone" value="{{ old('telefone') }}">
-                @error('telefone')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
-            <div class="col-sm-3 form-group">
-                <label for="celular">Celular</label>
-                <input type="text" class="form-control @error('celular') is-invalid @enderror" name="celular"
-                       id="celular" required value="{{ old('celular') }}">
-                @error('celular')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
+{{--            <div class="col-sm-3 form-group">--}}
+{{--                <label for="telefone">Telefone</label>--}}
+{{--                <input type="text" class="form-control @error('telefone') is-invalid @enderror" name="telefone"--}}
+{{--                       id="telefone" value="{{ old('telefone') }}">--}}
+{{--                @error('telefone')--}}
+{{--                <div class="invalid-feedback">--}}
+{{--                    {{ $message }}--}}
+{{--                </div>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
+{{--            <div class="col-sm-3 form-group">--}}
+{{--                <label for="celular">Celular</label>--}}
+{{--                <input type="text" class="form-control @error('celular') is-invalid @enderror" name="celular"--}}
+{{--                       id="celular" required value="{{ old('celular') }}">--}}
+{{--                @error('celular')--}}
+{{--                <div class="invalid-feedback">--}}
+{{--                    {{ $message }}--}}
+{{--                </div>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
         </div>
         <div class="form-row">
             <div class="col-sm-4 form-group">

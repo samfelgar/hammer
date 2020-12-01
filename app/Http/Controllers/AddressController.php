@@ -64,12 +64,15 @@ class AddressController extends Controller
      * @param Address $address
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Address $address)
+    public function edit(Request $request, Person $person, Address $address)
     {
         $redirectTo = $request->query('redirectTo') ?? null;
+        $routeName = $this->getActionName($person, 'update');
         return response()->view('addresses.edit', [
             'address' => $address,
             'redirectTo' => $redirectTo,
+            'action' => $routeName,
+            'person' => $person
         ]);
     }
 
@@ -81,7 +84,7 @@ class AddressController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function update(StoreAddress $request, Address $address)
+    public function update(StoreAddress $request, Person $person, Address $address)
     {
         try {
             $redirectTo = $request->query('redirectTo');
@@ -104,7 +107,7 @@ class AddressController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function destroy(Request $request, Address $address)
+    public function destroy(Request $request, Person $person, Address $address)
     {
         try {
             $redirectTo = $request->query('redirectTo');

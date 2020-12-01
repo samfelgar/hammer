@@ -43,13 +43,11 @@ Route::middleware('auth:professional')->group(function () {
         ->parameters([
             'professionals' => 'person',
         ])
-        ->shallow()
         ->except(['index', 'show']);
     Route::resource('professionals.addresses', 'AddressController')
         ->parameters([
             'professionals' => 'person',
         ])
-        ->shallow()
         ->except(['index', 'show']);
 });
 
@@ -58,22 +56,23 @@ Route::middleware('auth')->group(function () {
     Route::resource('advertisements.services', 'ServiceController')->shallow();
     Route::resource('clients', 'ClientController');
     Route::get('/dados', 'HomeController@meusDados')->name('meusDados');
-    Route::resource('clients.payments', 'PaymentMethodController');
+    Route::resource('clients.payments', 'PaymentMethodController')
+        ->parameters([
+            'payments' => 'paymentMethod'
+        ]);
     Route::resource('clients.phones', 'PhoneController')
         ->parameters([
             'clients' => 'person'
         ])
-        ->shallow()
         ->except(['index', 'show']);
     Route::resource('clients.addresses', 'AddressController')
         ->parameters([
             'clients' => 'person'
         ])
-        ->shallow()
         ->except(['index', 'show']);
 });
 
-Route::middleware('auth:user')->group(function (){
+Route::middleware('auth:user')->group(function () {
     Route::get('/dados/', 'HomeController@meusDados')->name('meusDados');
     Route::get('/admin/{user}/dashboard', 'AdminDashboardController@index')->name('admin.dashboard');
     Route::get('/services/{service}/admin', 'ServiceController@admin')->name('services.admin');

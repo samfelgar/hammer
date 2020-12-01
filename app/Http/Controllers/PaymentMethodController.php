@@ -90,23 +90,18 @@ class PaymentMethodController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Request $request
-     * @param PaymentMethod $payment
+     * @param Client $client
+     * @param PaymentMethod $paymentMethod
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function destroy(Request $request, PaymentMethod $paymentMethod)
+    public function destroy(Client $client, PaymentMethod $paymentMethod)
     {
-
         try {
-            $redirectTo = $request->query('redirectTo');
-            if (empty($redirectTo)) {
-                throw new \Exception('Acesso não permitido.');
-            }
             $paymentMethod->delete();
-            return redirect($redirectTo);
+            return redirect()->route('clients.show', [$client]);
         } catch (\Exception $e) {
-            throw $e;
+            throw new \DomainException($e->getMessage());
         }
     }
 }

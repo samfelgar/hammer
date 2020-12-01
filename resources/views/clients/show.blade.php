@@ -61,9 +61,9 @@
                         <td>{{ $phone->ddd }}</td>
                         <td>{{ $phone->numero }}</td>
                         <td>
-                            <a href="{{ route('phones.edit', [$phone, 'redirectTo' => url()->current()]) }}"
+                            <a href="{{ route('clients.phones.edit', [$client, $phone, 'redirectTo' => url()->current()]) }}"
                                class="btn btn-primary btn-sm">Editar</a>
-                            <form action="{{ route('phones.destroy', [$phone, 'redirectTo' => url()->current()]) }}"
+                            <form action="{{ route('clients.phones.destroy', [$client, $phone, 'redirectTo' => url()->current()]) }}"
                                   method="post" class="d-inline">
                                 @csrf
                                 @method('delete')
@@ -109,10 +109,10 @@
                         <td>{{ $address->uf }}</td>
                         <td>{{ $address->cep }}</td>
                         <td>
-                            <a href="{{ route('addresses.edit', [$address, 'redirectTo' => url()->current()]) }}"
+                            <a href="{{ route('clients.addresses.edit', [$client, $address, 'redirectTo' => url()->current()]) }}"
                                class="btn btn-primary btn-sm">Editar</a>
                             <form
-                                action="{{ route('addresses.destroy', [$address, 'redirectTo' => url()->current()]) }}"
+                                action="{{ route('clients.addresses.destroy', [$client, $address, 'redirectTo' => url()->current()]) }}"
                                 method="post" class="d-inline">
                                 @csrf
                                 @method('delete')
@@ -148,10 +148,10 @@
                     <tr>
                         <td>{{ $paymentMethod->holder }}</td>
                         <td>{{ $paymentMethod->number_formatted }}</td>
-                        <td>{{ $paymentMethod->valid_until }}</td>
+                        <td>{{ $paymentMethod->valid_until->format('d/m/Y') }}</td>
                         <td>
                             <form
-                                action="{{ route('payments.destroy', [$paymentMethod, 'redirectTo' => url()->current()]) }}"
+                                action="{{ route('clients.payments.destroy', [$client, $paymentMethod]) }}"
                                 method="post" class="d-inline">
                                 @csrf
                                 @method('delete')

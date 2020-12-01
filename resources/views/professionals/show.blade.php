@@ -57,8 +57,8 @@
                         <td>{{ $phone->ddd }}</td>
                         <td>{{ $phone->numero }}</td>
                         <td>
-                            <a href="{{ route('phones.edit', [$phone, 'redirectTo' => url()->current()]) }}" class="btn btn-primary btn-sm">Editar</a>
-                            <form action="{{ route('phones.destroy', [$phone, 'redirectTo' => url()->current()]) }}" method="post" class="d-inline">
+                            <a href="{{ route('professionals.phones.edit', [$professional, $phone, 'redirectTo' => url()->current()]) }}" class="btn btn-primary btn-sm">Editar</a>
+                            <form action="{{ route('professionals.phones.destroy', [$professional, $phone, 'redirectTo' => url()->current()]) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-danger btn-sm" type="submit">Excluir</button>
@@ -103,9 +103,9 @@
                         <td>{{ $address->uf }}</td>
                         <td>{{ $address->cep }}</td>
                         <td>
-                            <a href="{{ route('addresses.edit', [$address, 'redirectTo' => url()->current()]) }}"
+                            <a href="{{ route('professionals.addresses.edit', [$professional, $address, 'redirectTo' => url()->current()]) }}"
                                class="btn btn-primary btn-sm">Editar</a>
-                            <form action="{{ route('addresses.destroy', [$address, 'redirectTo' => url()->current()]) }}" method="post" class="d-inline">
+                            <form action="{{ route('professionals.addresses.destroy', [$professional, $address, 'redirectTo' => url()->current()]) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-danger btn-sm" type="submit">Excluir</button>

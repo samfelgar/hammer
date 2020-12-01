@@ -12,6 +12,10 @@ class PaymentMethod extends Model
         'holder',
     ];
 
+    protected $dates = [
+        'valid_until'
+    ];
+
     public function client()
     {
         return $this->belongsTo('App\Client', 'person_id');

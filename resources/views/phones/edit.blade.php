@@ -3,7 +3,7 @@
 @endsection
 @section('content')
     <h3>Editar telefone</h3>
-    <form action="{{ route('phones.update', [$phone, 'redirectTo' => $redirectTo]) }}" method="post">
+    <form action="{{ route($action, [$person, $phone, 'redirectTo' => $redirectTo]) }}" method="post">
         @csrf
         @method('put')
         <div class="form-row">
