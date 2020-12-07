@@ -40,7 +40,7 @@
     <div class="form-row">
         <div class="col-sm-7">
             <h5>Telefones <a
-                    href="{{ route('people.phones.create', [$professional, 'redirectTo' => route('professionals.show', [$professional])]) }}"
+                    href="{{ route('professionals.phones.create', [$professional, 'redirectTo' => route('professionals.show', [$professional])]) }}"
                     class="btn btn-sm btn-primary">novo</a>
             </h5>
             <table class="table table-sm">
@@ -57,8 +57,8 @@
                         <td>{{ $phone->ddd }}</td>
                         <td>{{ $phone->numero }}</td>
                         <td>
-                            <a href="{{ route('phones.edit', [$phone, 'redirectTo' => url()->current()]) }}" class="btn btn-primary btn-sm">Editar</a>
-                            <form action="{{ route('phones.destroy', [$phone, 'redirectTo' => url()->current()]) }}" method="post" class="d-inline">
+                            <a href="{{ route('professionals.phones.edit', [$professional, $phone, 'redirectTo' => url()->current()]) }}" class="btn btn-primary btn-sm">Editar</a>
+                            <form action="{{ route('professionals.phones.destroy', [$professional, $phone, 'redirectTo' => url()->current()]) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-danger btn-sm" type="submit">Excluir</button>
@@ -77,7 +77,7 @@
     <div class="form-row">
         <div class="col-sm">
             <h5>Endereços <a
-                    href="{{ route('people.addresses.create', [$professional, 'redirectTo' => url()->current()]) }}"
+                    href="{{ route('professionals.addresses.create', [$professional, 'redirectTo' => url()->current()]) }}"
                     class="btn btn-sm btn-primary">novo</a></h5>
             <table class="table table-sm">
                 <thead>
@@ -103,9 +103,9 @@
                         <td>{{ $address->uf }}</td>
                         <td>{{ $address->cep }}</td>
                         <td>
-                            <a href="{{ route('addresses.edit', [$address, 'redirectTo' => url()->current()]) }}"
+                            <a href="{{ route('professionals.addresses.edit', [$professional, $address, 'redirectTo' => url()->current()]) }}"
                                class="btn btn-primary btn-sm">Editar</a>
-                            <form action="{{ route('addresses.destroy', [$address, 'redirectTo' => url()->current()]) }}" method="post" class="d-inline">
+                            <form action="{{ route('professionals.addresses.destroy', [$professional, $address, 'redirectTo' => url()->current()]) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-danger btn-sm" type="submit">Excluir</button>

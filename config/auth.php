@@ -41,10 +41,13 @@ return [
             'provider' => 'clients',
         ],
 
-        'api' => [
-            'driver' => 'token',
+        'professional' => [
+            'driver' => 'session',
+            'provider' => 'professionals',
+        ],
+        'user' => [
+            'driver' => 'session',
             'provider' => 'users',
-            'hash' => false,
         ],
     ],
 
@@ -74,11 +77,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Client::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'professionals' => [
+            'driver' => 'eloquent',
+            'model' => App\Professional::class,
+        ],
     ],
 
     /*

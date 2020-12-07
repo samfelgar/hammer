@@ -26,7 +26,7 @@ class StoreProfessional extends FormRequest
         return [
             'nome' => 'required',
             'email' => 'required|unique:people',
-            'nascimento' => 'required|date',
+            'nascimento' => 'required|date_format:d/m/Y',
             'rg' => 'required',
             'cpf' => 'required|cpf',
             'telefone' => 'nullable',

@@ -5,19 +5,14 @@ namespace App\Http\Controllers;
 use App\Address;
 use App\Http\Requests\StoreAddress;
 use App\Person;
+use App\Traits\GenericPersonActions;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    use GenericPersonActions;
+
+    protected $routeSlug = 'addresses';
 
     /**
      * Show the form for creating a new resource.
@@ -25,12 +20,15 @@ class AddressController extends Controller
      * @param Request $request
      * @param Person $person
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function create(Request $request, Person $person)
     {
         $redirectTo = $request->query('redirectTo') ?? null;
+        $routeName = $this->getActionName($person, 'store');
         return response()->view('addresses.create', [
             'person' => $person,
+            'action' => $routeName,
             'redirectTo' => $redirectTo,
         ]);
     }
@@ -60,29 +58,21 @@ class AddressController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param Request $request
      * @param Address $address
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Address $address)
+    public function edit(Request $request, Person $person, Address $address)
     {
         $redirectTo = $request->query('redirectTo') ?? null;
+        $routeName = $this->getActionName($person, 'update');
         return response()->view('addresses.edit', [
             'address' => $address,
             'redirectTo' => $redirectTo,
+            'action' => $routeName,
+            'person' => $person
         ]);
     }
 
@@ -94,7 +84,7 @@ class AddressController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function update(StoreAddress $request, Address $address)
+    public function update(StoreAddress $request, Person $person, Address $address)
     {
         try {
             $redirectTo = $request->query('redirectTo');
@@ -117,7 +107,7 @@ class AddressController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function destroy(Request $request, Address $address)
+    public function destroy(Request $request, Person $person, Address $address)
     {
         try {
             $redirectTo = $request->query('redirectTo');

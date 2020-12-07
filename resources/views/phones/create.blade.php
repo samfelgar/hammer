@@ -3,7 +3,7 @@
 @endsection
 @section('content')
     <h3>Novo telefone</h3>
-    <form action="{{ route('people.phones.store', [$person, 'redirectTo' => $redirectTo]) }}" method="post">
+    <form action="{{ route($action, [$person, 'redirectTo' => $redirectTo]) }}" method="post">
         @csrf
         <div class="form-row">
             <div class="col-sm-2 form-group">

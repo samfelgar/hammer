@@ -18,9 +18,9 @@
 
 
         <div class="form-group row">
-            <label for="price" class="col-sm-2 col-form-label">Valor</label>
+            <label for="valor" class="col-sm-2 col-form-label">Valor</label>
             <div class="col-sm-4">
-                <input type="text" oninput="mascara(this)" name="preco" value="{{$advertisements->preco}}" id="price"
+                <input type="text"  name="preco" value="{{$advertisements->preco_formatted}}" id="valor"
                        class="form-control @error('preco') is-invalid @enderror">
 
             </div>
@@ -58,16 +58,5 @@
 
 
     </form>
-    <script>
-        function mascara(i) {
 
-            var v = i.value;
-
-            if (isNaN(v[v.length - 1])) { // impede entrar outro caractere que não seja número
-                i.value = v.substring(0, v.length - 1);
-                return;
-            }
-
-        }
-    </script>
 @endsection

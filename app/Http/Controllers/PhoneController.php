@@ -5,19 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePhone;
 use App\Person;
 use App\Phone;
+use App\Professional;
+use App\Traits\GenericPersonActions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PhoneController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    use GenericPersonActions;
+
+    protected $routeSlug = 'phones';
 
     /**
      * Show the form for creating a new resource.
@@ -25,12 +22,15 @@ class PhoneController extends Controller
      * @param Request $request
      * @param Person $person
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function create(Request $request, Person $person)
     {
         $redirectTo = $request->query('redirectTo') ?? null;
+        $routeName = $this->getActionName($person, 'store');
         return response()->view('phones.create', [
             'person' => $person,
+            'action' => $routeName,
             'redirectTo' => $redirectTo,
         ]);
     }
@@ -59,29 +59,21 @@ class PhoneController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param Request $request
      * @param Phone $phone
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Phone $phone)
+    public function edit(Request $request, Person $person, Phone $phone)
     {
         $redirect = $request->query('redirectTo');
+        $routeName = $this->getActionName($person, 'update');
         return response()->view('phones.edit', [
+            'person' => $person,
             'phone' => $phone,
             'redirectTo' => $redirect,
+            'action' => $routeName
         ]);
     }
 
@@ -93,7 +85,7 @@ class PhoneController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
      * @throws \Exception
      */
-    public function update(StorePhone $request, Phone $phone)
+    public function update(StorePhone $request, Person $person, Phone $phone)
     {
         try {
             $redirectTo = $request->query('redirectTo') ?? null;
@@ -116,7 +108,7 @@ class PhoneController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function destroy(Request $request, Phone $phone)
+    public function destroy(Request $request, Person $person, Phone $phone)
     {
         try {
             $redirectTo = $request->query('redirectTo');

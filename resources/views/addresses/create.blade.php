@@ -3,7 +3,7 @@
 @endsection
 @section('content')
     <h3>Novo endereço</h3>
-    <form action="{{ route('people.addresses.store', [$person, 'redirectTo' => $redirectTo]) }}" method="post">
+    <form action="{{ route($action, [$person, 'redirectTo' => $redirectTo]) }}" method="post">
         @csrf
         <div class="form-row">
             <div class="col-sm-6 form-group">
@@ -55,6 +55,11 @@
                         <option value="{{ $key }}">{{ $uf }}</option>
                     @endforeach
                 </select>
+                @error('uf')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
             </div>
             <div class="col-sm-4 form-group">
                 <label for="complemento">Complemento</label>
@@ -81,7 +86,7 @@
         </div>
         <div class="form-row">
             <div class="col-sm">
-                <button class="btn btn-primary">Salvar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
         </div>
     </form>

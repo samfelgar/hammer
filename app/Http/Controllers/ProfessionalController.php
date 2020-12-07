@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Contracts\HasPhoneInterface;
 use App\Http\Requests\StoreProfessional;
 use App\Professional;
+use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfessionalController extends Controller
 {
@@ -38,7 +41,14 @@ class ProfessionalController extends Controller
      */
     public function store(StoreProfessional $request)
     {
-        $professional = Professional::create($request->validated());
+        $this->authorize('create', Professional::class);
+        $data = $request->validated();
+        $data['nascimento'] = \DateTime::createFromFormat('d/m/Y', $data['nascimento']);
+        $professional = new Professional();
+        $professional->fill($data);
+        $professional->senha = Hash::make($professional->senha);
+        $professional->save();
+        Auth::guard('professional')->login($professional);
         return redirect()->route('professionals.show', [$professional])->with('success', 'Dados salvos com sucesso!');
     }
 
@@ -50,6 +60,7 @@ class ProfessionalController extends Controller
      */
     public function show(Professional $professional)
     {
+        $this->authorize('view' , $professional);
         return response()->view('professionals.show', [
             'professional' => $professional,
         ]);
@@ -63,6 +74,7 @@ class ProfessionalController extends Controller
      */
     public function edit(Professional $professional)
     {
+        $this->authorize('update' , $professional);
         return response()->view('professionals.edit', [
             'professional' => $professional
         ]);
@@ -105,5 +117,10 @@ class ProfessionalController extends Controller
     public function destroy(Professional $professional)
     {
         //
+    }
+
+    public function admin(Professional $professional)
+    {
+        return view('admin.professional', ['professional' => $professional]);
     }
 }

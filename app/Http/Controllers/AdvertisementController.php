@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\StoreAdvertisement;
+use App\Photo;
 use App\Professional;
 use App\Advertisement;
 use App\Phone;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AdvertisementController extends Controller
 {
@@ -18,10 +20,26 @@ class AdvertisementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Advertisement $advertisement)
+    public function index()
     {
-        return view('advertisements.all', [
+        return response()->view('advertisements.all', [
             'advertisements' => Advertisement::all(),
+        ]);
+    }
+
+    public function searchByTitle(Request $request)
+    {
+        $advertisements = Advertisement::where('titulo', 'like', "%{$request->search}%")->get();
+        $categories = Category::with('advertisements')->where('nome', 'like', "%{$request->search}%")->get();
+        foreach ($categories as $category) {
+            foreach ($category->advertisements as $child) {
+                $advertisements->push($child);
+            }
+        }
+
+        return response()->view('advertisements.all', [
+            'advertisements' => $advertisements->unique(),
+            'search' => $request->search,
         ]);
     }
 
@@ -32,7 +50,7 @@ class AdvertisementController extends Controller
      */
     public function create(Professional $professional)
     {
-
+        $this->authorizeResource('create', $professional);
         return response()->view('advertisements.create', [
             'professional' => $professional,
             'categories' => Category::all(),
@@ -47,12 +65,20 @@ class AdvertisementController extends Controller
      */
     public function store(StoreAdvertisement $request, Professional $professional)
     {
+        $this->authorize('create', $professional);
         $category = Category::find($request->categoria);
         $advertisement = new Advertisement();
         $advertisement->fill($request->validated());
         $advertisement->data = new Carbon();
         $advertisement->category()->associate($category);
         $professional->advertisements()->save($advertisement);
+        if ($request->has('photo')) {
+            $photo = new Photo();
+            $photo->path = $request->photo->store('advertisements', 'public');
+            $photo->mime = $request->photo->getMimeType();
+            $photo->descricao = $advertisement->titulo;
+            $advertisement->photos()->save($photo);
+        }
         return redirect()->route('professionals.dashboard', [
             $professional
         ]);
@@ -66,11 +92,10 @@ class AdvertisementController extends Controller
      */
     public function show(Advertisement $advertisement)
     {
-
-        $person = Professional::find($advertisement->person_id);
         return view('advertisements.ad', [
-            'advertisements' => $advertisement,
-            'professional' => $person,
+            'advertisement' => $advertisement,
+            'professional' => $advertisement->professional,
+            'photo' => Storage::disk('public')->url($advertisement->photos()->first()->path)
         ]);
     }
 
@@ -82,6 +107,7 @@ class AdvertisementController extends Controller
      */
     public function edit(Advertisement $advertisement)
     {
+        $this->authorizeResource('update', $advertisement);
         return view('advertisements.edit', [
             'advertisements' => $advertisement,
             'categories' => Category::all(),
@@ -93,10 +119,11 @@ class AdvertisementController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param Advertisement $advertisement
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Advertisement $advertisement)
     {
+        $this->authorizeResource('update', $advertisement);
         $category = Category::find($request->categoria);
         $advertisement->category()->associate($category);
         $data = $request->validate([
@@ -114,8 +141,32 @@ class AdvertisementController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Advertisement $advertisement)
     {
-        //
+        $this->authorizeResource('update', $advertisement);
+        try {
+            if (empty($advertisement)) {
+                throw new \Exception('Acesso não permitido.');
+
+            }
+
+            $advertisement->delete();
+            return redirect()->route('professionals.dashboard', $advertisement->professional);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * Retira a exclusão do Anuncio
+     *
+     * @param Advertisement $advertisement
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
+     */
+    public function restore($advertisement)
+    {
+        Advertisement::withTrashed()->where('id', $advertisement)->restore();
+        return redirect(url()->previous());
+
     }
 }

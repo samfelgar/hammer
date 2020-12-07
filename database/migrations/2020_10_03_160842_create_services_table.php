@@ -18,7 +18,7 @@ class CreateServicesTable extends Migration
             $table->date('data');
             $table->string('os');
             $table->integer('status');
-            $table->foreignId('person_id')->constrained();
+            $table->foreignId('payment_method_id')->constrained();
             $table->foreignId('advertisement_id')->constrained();
             $table->timestamps();
         });

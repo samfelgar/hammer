@@ -3,7 +3,7 @@
 @endsection
 @section('content')
     <h3>Editar endereço</h3>
-    <form action="{{ route('addresses.update', [$address, 'redirectTo' => $redirectTo]) }}" method="post">
+    <form action="{{ route($action, [$person, $address, 'redirectTo' => $redirectTo]) }}" method="post">
         @csrf
         @method('put')
         <div class="form-row">
