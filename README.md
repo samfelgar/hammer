@@ -38,8 +38,9 @@ No mesmo arquivo `.env.example`, modifique o campo APP_URL, inserindo o valor de
 3. Altere o nome do arquivo `.env.example` para `.env`.
 
 4. Na pasta raiz do projeto, execute `composer install` (você deve ter o composer instalado globalmente)
-5. Execute `php artisan migrate`. Este comando criará as tabelas no banco de dados especificado.
-6. Execute `php artisan db:seed`. Este comando irá popular o banco com algumas informações.
+5. Execute `php artisan storage:link`.
+6. Execute `php artisan migrate`. Este comando criará as tabelas no banco de dados especificado.
+7. Execute `php artisan db:seed`. Este comando irá popular o banco com algumas informações.
 
 Após a execução do comando acima, serão criados usuários para realização de testes:
 
@@ -48,7 +49,7 @@ Após a execução do comando acima, serão criados usuários para realização 
 - mauricio@gmail.com, senha 123456, tipo: CLIENTE
 - willian@gmail.com, senha 123456, tipo: USUÁRIO (interno)
 
-7. Execute `php artisan serve` para iniciar o servidor local
+8. Execute `php artisan serve` para iniciar o servidor local
 
 - Caso esteja utilizando o XAMPP (ou similares), ao tenta acessar pelo navegador, acrescente `/public` à URL.
 
