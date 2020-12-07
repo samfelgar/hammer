@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
                 'cpf' => '99999999999',
                 'nascimento' => Carbon::create(1998, 11, 9),
                 'email' => 'daniel@gmail.com',
-                'tipo' => \App\User::USER,
+                'tipo' => \App\User::PROFESSIONAL,
                 'senha' => Hash::make('123456'),
             ],
             [
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
                 'cpf' => '99999999999',
                 'nascimento' => Carbon::create(1998, 5, 20),
                 'email' => 'mauricio@gmail.com',
-                'tipo' => \App\User::USER,
+                'tipo' => \App\User::CLIENT,
                 'senha' => Hash::make('123456'),
             ],
             [
